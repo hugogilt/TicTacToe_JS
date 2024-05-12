@@ -280,6 +280,7 @@
 	
 	function responder(num){
 	if (casillas[num].textContent === '') {
+		casillas[num].onclick = null;
 		if (player === 'X') {
 			casillas[num].textContent = 'O';
 		}
@@ -318,250 +319,138 @@
 	function defenderse() {
 		if (casillas[0].textContent === player&&casillas[1].textContent === player&&casillas[2].textContent === '') {
 
-			if (player === 'X') {
-				casillas[2].textContent = 'O';
-			}
-			else {
-				casillas[2].textContent = 'X';
-			}
+			responder(2);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[1].textContent === player&&casillas[2].textContent === player&&casillas[0].textContent === '') {
-			if (player === 'X') {
-				casillas[0].textContent = 'O';
-			}
-			else {
-				casillas[0].textContent = 'X';
-			}
+			responder(0);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[3].textContent === player&&casillas[4].textContent === player&&casillas[5].textContent === '') {
-			if (player === 'X') {
-				casillas[5].textContent = 'O';
-			}
-			else {
-				casillas[5].textContent = 'X';
-			}
+			responder(5);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[4].textContent === player&&casillas[5].textContent === player&&casillas[3].textContent === '') {
-			if (player === 'X') {
-				casillas[3].textContent = 'O';
-			}
-			else {
-				casillas[3].textContent = 'X';
-			}
+			responder(3);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[6].textContent === player&&casillas[7].textContent === player&&casillas[8].textContent === '') {
-			if (player === 'X') {
-				casillas[8].textContent = 'O';
-			}
-			else {
-				casillas[8].textContent = 'X';
-			}
+			responder(8);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[7].textContent === player&&casillas[8].textContent === player&&casillas[6].textContent === '') {
-			if (player === 'X') {
-				casillas[6].textContent = 'O';
-			}
-			else {
-				casillas[6].textContent = 'X';
-			}
+			responder(6);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[0].textContent === player&&casillas[3].textContent === player&&casillas[6].textContent === '') {
-			if (player === 'X') {
-				casillas[6].textContent = 'O';
-			}
-			else {
-				casillas[6].textContent = 'X';
-			}
+			responder(6);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[3].textContent === player&&casillas[6].textContent === player&&casillas[0].textContent === '') {
-			if (player === 'X') {
-				casillas[0].textContent = 'O';
-			}
-			else {
-				casillas[0].textContent = 'X';
-			}
+			responder(0);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[1].textContent === player&&casillas[4].textContent === player&&casillas[7].textContent === '') {
-			if (player === 'X') {
-				casillas[7].textContent = 'O';
-			}
-			else {
-				casillas[7].textContent = 'X';
-			}
+			responder(7);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[4].textContent === player&&casillas[7].textContent === player&&casillas[1].textContent === '') {
-			if (player === 'X') {
-				casillas[1].textContent = 'O';
-			}
-			else {
-				casillas[1].textContent = 'X';
-			}
+			responder(1);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[2].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === '') {
-			if (player === 'X') {
-				casillas[8].textContent = 'O';
-			}
-			else {
-				casillas[8].textContent = 'X';
-			}
+			responder(8);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[5].textContent === player&&casillas[8].textContent === player&&casillas[2].textContent === '') {
-			if (player === 'X') {
-				casillas[2].textContent = 'O';
-			}
-			else {
-				casillas[2].textContent = 'X';
-			}
+			responder(2);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[0].textContent === player&&casillas[4].textContent === player&&casillas[8].textContent === '') {
-			if (player === 'X') {
-				casillas[8].textContent = 'O';
-			}
-			else {
-				casillas[8].textContent = 'X';
-			}
+			responder(8);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[4].textContent === player&&casillas[8].textContent === player&&casillas[0].textContent === '') {
-			if (player === 'X') {
-				casillas[0].textContent = 'O';
-			}
-			else {
-				casillas[0].textContent = 'X';
-			}
+			responder(0);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[2].textContent === player&&casillas[4].textContent === player&&casillas[6].textContent === '') {
-			if (player === 'X') {
-				casillas[6].textContent = 'O';
-			}
-			else {
-				casillas[6].textContent = 'X';
-			}
+			responder(6);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[4].textContent === player&&casillas[6].textContent === player&&casillas[2].textContent === '') {
-			if (player === 'X') {
-				casillas[2].textContent = 'O';
-			}
-			else {
-				casillas[2].textContent = 'X';
-			}
+			responder(2);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[0].textContent === player&&casillas[2].textContent === player&&casillas[1].textContent === '') {
-			if (player === 'X') {
-				casillas[1].textContent = 'O';
-			}
-			else {
-				casillas[1].textContent = 'X';
-			}
+			responder(1);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[3].textContent === player&&casillas[5].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[6].textContent === player&&casillas[8].textContent === player&&casillas[7].textContent === '') {
-			if (player === 'X') {
-				casillas[7].textContent = 'O';
-			}
-			else {
-				casillas[7].textContent = 'X';
-			}
+			responder(7);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[0].textContent === player&&casillas[6].textContent === player&&casillas[3].textContent === '') {
-
-			if (player === 'X') {
-				casillas[3].textContent = 'O';
-			}
-			else {
-				casillas[3].textContent = 'X';
-			}
+			responder(3);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[1].textContent === player&&casillas[7].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 		}
 		else if (casillas[2].textContent === player&&casillas[8].textContent === player&&casillas[5].textContent === '') {
-			if (player === 'X') {
-				casillas[5].textContent = 'O';
-			}
-			else {
-				casillas[5].textContent = 'X';
-			}
+			responder(5);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[0].textContent === player&&casillas[8].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
 		}
 		else if (casillas[2].textContent === player&&casillas[6].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 
@@ -801,7 +690,7 @@
 				empiezaMedio=false;
 				empiezaEsquina=false;
 				empiezaLado=false;
-				alert('empate');
+				alert('Empate');
 				// JOptionPane.showMessageDialog(LocalMedio.contentPane, "Has empatado", "Empate!", JOptionPane.INFORMATION_MESSAGE);
 				// try {
 				// 	String update = "UPDATE Usuarios SET EmpatesLocalImposible = EmpatesLocalImposible+1 WHERE Usuario=?";
@@ -828,272 +717,154 @@
 	function defenderseSinAleatorio() {
 		if (casillas[0].textContent === player&&casillas[1].textContent === player&&casillas[2].textContent === '') {
 
-			if (player === 'X') {
-				casillas[2].textContent = 'O';
-			}
-			else {
-				casillas[2].textContent = 'X';
-			}
+			responder(2);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 
 		}
 		else if (casillas[1].textContent === player&&casillas[2].textContent === player&&casillas[0].textContent === '') {
-			if (player === 'X') {
-				casillas[0].textContent = 'O';
-			}
-			else {
-				casillas[0].textContent = 'X';
-			}
+			responder(0);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[3].textContent === player&&casillas[4].textContent === player&&casillas[5].textContent === '') {
-			if (player === 'X') {
-				casillas[5].textContent = 'O';
-			}
-			else {
-				casillas[5].textContent = 'X';
-			}
+			responder(5);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 
 		}
 		else if (casillas[4].textContent === player&&casillas[5].textContent === player&&casillas[3].textContent === '') {
-			if (player === 'X') {
-				casillas[3].textContent = 'O';
-			}
-			else {
-				casillas[3].textContent = 'X';
-			}
+			responder(3);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[6].textContent === player&&casillas[7].textContent === player&&casillas[8].textContent === '') {
-			if (player === 'X') {
-				casillas[8].textContent = 'O';
-			}
-			else {
-				casillas[8].textContent = 'X';
-			}
+			responder(8);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[7].textContent === player&&casillas[8].textContent === player&&casillas[6].textContent === '') {
-			if (player === 'X') {
-				casillas[6].textContent = 'O';
-			}
-			else {
-				casillas[6].textContent = 'X';
-			}
+			responder(6);
+
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 
 		}
 		else if (casillas[0].textContent === player&&casillas[3].textContent === player&&casillas[6].textContent === '') {
-			if (player === 'X') {
-				casillas[6].textContent = 'O';
-			}
-			else {
-				casillas[6].textContent = 'X';
-			}
+			responder(6);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[3].textContent === player&&casillas[6].textContent === player&&casillas[0].textContent === '') {
-			if (player === 'X') {
-				casillas[0].textContent = 'O';
-			}
-			else {
-				casillas[0].textContent = 'X';
-			}
+			responder(0);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[1].textContent === player&&casillas[4].textContent === player&&casillas[7].textContent === '') {
-			if (player === 'X') {
-				casillas[7].textContent = 'O';
-			}
-			else {
-				casillas[7].textContent = 'X';
-			}
+			responder(7);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[4].textContent === player&&casillas[7].textContent === player&&casillas[1].textContent === '') {
-			if (player === 'X') {
-				casillas[1].textContent = 'O';
-			}
-			else {
-				casillas[1].textContent = 'X';
-			}
+			responder(1);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[2].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === '') {
-			if (player === 'X') {
-				casillas[8].textContent = 'O';
-			}
-			else {
-				casillas[8].textContent = 'X';
-			}
+			responder(8);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[5].textContent === player&&casillas[8].textContent === player&&casillas[2].textContent === '') {
-			if (player === 'X') {
-				casillas[2].textContent = 'O';
-			}
-			else {
-				casillas[2].textContent = 'X';
-			}
+			responder(2);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[0].textContent === player&&casillas[4].textContent === player&&casillas[8].textContent === '') {
-			if (player === 'X') {
-				casillas[8].textContent = 'O';
-			}
-			else {
-				casillas[8].textContent = 'X';
-			}
+			responder(8);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 
 		}
 		else if (casillas[4].textContent === player&&casillas[8].textContent === player&&casillas[0].textContent === '') {
-			if (player === 'X') {
-				casillas[0].textContent = 'O';
-			}
-			else {
-				casillas[0].textContent = 'X';
-			}
+			responder(0);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[2].textContent === player&&casillas[4].textContent === player&&casillas[6].textContent === '') {
-			if (player === 'X') {
-				casillas[6].textContent = 'O';
-			}
-			else {
-				casillas[6].textContent = 'X';
-			}
+			responder(6);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[4].textContent === player&&casillas[6].textContent === player&&casillas[2].textContent === '') {
-			if (player === 'X') {
-				casillas[2].textContent = 'O';
-			}
-			else {
-				casillas[2].textContent = 'X';
-			}
+			responder(2);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[0].textContent === player&&casillas[2].textContent === player&&casillas[1].textContent === '') {
-			if (player === 'X') {
-				casillas[1].textContent = 'O';
-			}
-			else {
-				casillas[1].textContent = 'X';
-			}
+			responder(1);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[3].textContent === player&&casillas[5].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[6].textContent === player&&casillas[8].textContent === player&&casillas[7].textContent === '') {
-			if (player === 'X') {
-				casillas[7].textContent = 'O';
-			}
-			else {
-				casillas[7].textContent = 'X';
-			}
+			responder(7);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[0].textContent === player&&casillas[6].textContent === player&&casillas[3].textContent === '') {
-
-			if (player === 'X') {
-				casillas[3].textContent = 'O';
-			}
-			else {
-				casillas[3].textContent = 'X';
-			}
+			responder(3);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[1].textContent === player&&casillas[7].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 		}
 		else if (casillas[2].textContent === player&&casillas[8].textContent === player&&casillas[5].textContent === '') {
-			if (player === 'X') {
-				casillas[5].textContent = 'O';
-			}
-			else {
-				casillas[5].textContent = 'X';
-			}
+			responder(5);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 
 		}
 		else if (casillas[0].textContent === player&&casillas[8].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
 
 		}
 		else if (casillas[2].textContent === player&&casillas[6].textContent === player&&casillas[4].textContent === '') {
-			if (player === 'X') {
-				casillas[4].textContent = 'O';
-			}
-			else {
-				casillas[4].textContent = 'X';
-			}
+			responder(4);
 			// LocalImposible.setTurnoPlayer(true);
 			// LocalImposible.actualizarEstado();
 			return true;
