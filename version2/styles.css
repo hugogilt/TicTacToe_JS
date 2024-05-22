@@ -78,14 +78,14 @@ h1 {
 
 @media (max-width: 600px) {
     .board {
-        grid-template-columns: repeat(3, 80px); /* Reducir el ancho de las columnas */
-        grid-template-rows: repeat(3, 80px); /* Reducir la altura de las filas */
+        grid-template-columns: repeat(3, 100px); /* Reducir el ancho de las columnas */
+        grid-template-rows: repeat(3, 100px); /* Reducir la altura de las filas */
         border-width: 3px; /* Reducir el grosor del borde */
     }
 
     .cell {
-        width: 80px; /* Reducir el ancho de las celdas */
-        height: 80px; /* Reducir la altura de las celdas */
+        width: 100px; /* Reducir el ancho de las celdas */
+        height: 100px; /* Reducir la altura de las celdas */
         font-size: 1.5em; /* Reducir el tamaño de la fuente */
     }
     
