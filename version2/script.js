@@ -95,7 +95,6 @@ const fichaSinElegir = document.createElement('p');
 const nivelSinElegir = document.createElement('p');
 let nivelElegido = undefined;
 let fichaElegida = undefined;
-let clavesLinea = null;
 
 
 cambioPantallaInicio();
@@ -263,10 +262,6 @@ function showModal(mensaje) {
 function closeModal() {
     var modal = document.getElementById("resultadoModal");
     modal.style.display = "none";
-    if (clavesLinea !== null) {
-        showWinLine(...clavesLinea);
-        clavesLinea = null;
-    }
 }
   
   // Ejemplo de llamada a la función showModal cuando el juego termina
@@ -567,29 +562,15 @@ function maquinaIntentaGanar(){
 }
 
 function ganaMaquina(casillasGanadoras) {
-    // // LocalImposible.setTurnoPlayer(true);
-    // for (SquareButton squareButton : sqA) {
-    // 	squareButton.setEnabled(false);
-    // }
-    // LocalImposible.btnJugarDeNuevo.setVisible(true);
     empiezaMedio=false;
     empiezaEsquina=false;
     empiezaLado=false;
     for(let casilla of casillas) {
         casilla.onclick = null;
     }
-    
+    showWinLine(casillasGanadoras, 'red')
     checkGameStatus('derrota');
-    clavesLinea = [casillasGanadoras, 'red']
-    // JOptionPane.showMessageDialog(LocalMedio.contentPane, "Has perdido", "Derrota!", JOptionPane.ERROR_MESSAGE);
-    // try {
-    // 	String update = "UPDATE Usuarios SET DerrotasLocalImposible = DerrotasLocalImposible+1 WHERE Usuario=?";
-    // 	ps = Aws.getConnection().prepareStatement(update);
-    // 	Aws.lanzar(ps, 1, Login.getUsuario(), Aws.STRING);
-    // 	ps.execute();
-    // 	} catch (SQLException e1) {
-    // 		e1.printStackTrace();
-    // 	}
+    document.querySelector('.modal').style.backgroundColor = 'rgba(128,0,0,0.4)'
 }
 
 function defenderse() {
@@ -1038,8 +1019,9 @@ function ganaJugador(casillasGanadoras) {
     for(let casilla of casillas) {
         casilla.onclick = null;
     }
-    clavesLinea = [casillasGanadoras, 'green']
+    showWinLine(casillasGanadoras, 'green');
     checkGameStatus('victoria');
+    document.querySelector('.modal').style.backgroundColor = 'rgba(0,128,0,0.4)'
 }
 
 function saberSiGanaJugador() {
@@ -1104,6 +1086,7 @@ function responderAleatoriamente(){
         empiezaEsquina=false;
         empiezaLado=false;
         checkGameStatus('empate');
+        document.querySelector('.modal').style.backgroundColor = 'rgba(0,0,0,0.4)'
     }
     else {
         do{
