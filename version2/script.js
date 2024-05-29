@@ -95,6 +95,7 @@ const fichaSinElegir = document.createElement('p');
 const nivelSinElegir = document.createElement('p');
 let nivelElegido = undefined;
 let fichaElegida = undefined;
+let clavesLinea = null;
 
 
 cambioPantallaInicio();
@@ -190,8 +191,14 @@ function cambioPantallaJuego(){
     document.querySelector('#player-choice').textContent = playerChoiceTextJuego+fichaElegida.textContent;
     player = fichaElegida.textContent;
     playerMaquina = player === 'X' ? 'O' : 'X';
-    if (botonesNiveles[3] === nivelElegido) { 
-        imposible()
+    if (botonesNiveles[0] === nivelElegido) {
+        facil();
+    } else if (botonesNiveles[1] === nivelElegido) { 
+        medio();
+    } else if (botonesNiveles[2] === nivelElegido) { 
+        dificil();
+    } else if (botonesNiveles[3] === nivelElegido) { 
+        imposible();
     }
 }
 
@@ -222,7 +229,13 @@ function reiniciar(){
     for(let casilla of casillas){
         casilla.textContent = '';
     }
-    if (nivelElegido === botonesNiveles[3]) {
+    if (botonesNiveles[0] === nivelElegido) {
+        facil();
+    } else if (botonesNiveles[1] === nivelElegido) { 
+        medio();
+    } else if (botonesNiveles[2] === nivelElegido) { 
+        dificil();
+    } else if (botonesNiveles[3] === nivelElegido) { 
         imposible();
     }
 }
@@ -250,6 +263,10 @@ function showModal(mensaje) {
 function closeModal() {
     var modal = document.getElementById("resultadoModal");
     modal.style.display = "none";
+    if (clavesLinea !== null) {
+        showWinLine(...clavesLinea);
+        clavesLinea = null;
+    }
 }
   
   // Ejemplo de llamada a la función showModal cuando el juego termina
@@ -270,174 +287,134 @@ function checkGameStatus(resultado) {
 //Juego
 
 function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+    return Math.floor(Math.random() * max); //si le paso un 9 devolverá de 0 a 8
+}
+
+// Genera un número aleatorio que sea 0 o 1
+function random0to1() {
+    return Math.floor(Math.random() * 2);
 }
 
 function imposible(){
     for(const casilla of casillas){
         casilla.onclick = (e) => {
-        // casilla.textContent = player;
         // casilla.style.fontSize = '40px'
-        casilla.textContent = player; //por implementar
+        casilla.textContent = player;
         casilla.style.color = 'green'
         casillasMarcadas++;
         e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
-        // debugger;
-        if ((casillas[0].textContent === player&&casillas[1].textContent === player&&casillas[2].textContent === player)||(casillas[3].textContent === player&&casillas[4].textContent === player&&casillas[5].textContent === player)||(casillas[6].textContent === player&&casillas[7].textContent === player&&casillas[8].textContent === player)||(casillas[0].textContent === player&&casillas[3].textContent === player&&casillas[6].textContent === player)||(casillas[1].textContent === player&&casillas[4].textContent === player&&casillas[7].textContent === player)||(casillas[2].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === player)||(casillas[0].textContent === player&&casillas[4].textContent === player&&casillas[8].textContent === player)||(casillas[2].textContent === player&&casillas[4].textContent === player&&casillas[6].textContent === player)) {
-                    // for (SquareButton squareButton : sqA) {
-                    // 	squareButton.setEnabled(false);
-                    // }
-                    //// LocalImposible.setTurnoPlayer(true);
-                    //LocalImposible.btnJugarDeNuevo.setVisible(true);
-                    empiezaMedio=false;
-                    empiezaEsquina=false;
-                    empiezaLado=false;
-                    for(let casilla of casillas) {
-                        casilla.onclick = null;
-                    }
-                    
-                    alert('Has ganado!')
-
-                    // JOptionPane.showMessageDialog(LocalMedio.contentPane, "Has ganado", "Victoria!", JOptionPane.INFORMATION_MESSAGE);
-                    // try {
-                    // 	String update = "UPDATE Usuarios SET VictoriasLocalImposible = VictoriasLocalImposible+1 WHERE Usuario=?";
-                    // 	ps = Aws.getConnection().prepareStatement(update);
-                    // 	Aws.lanzar(ps, 1, Login.getUsuario(), Aws.STRING);
-                    // 	ps.execute();
-                    // 	} catch (SQLException e1) {
-                    // 		e1.printStackTrace();
-                    // 	}
+        if (saberSiGanaJugador()) {
+            empiezaMedio=false;
+            empiezaEsquina=false;
+            empiezaLado=false;
         }
+        else {
                 if (casillasMarcadas!=1) {
                 if (casillas[0].textContent === playerMaquina &&casillas[1].textContent === playerMaquina &&casillas[2].textContent === '') {
 
                     responder(2);
-                    showWinLine([0,1,2], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,1,2]);
                     
 
                 }
                 else if (casillas[1].textContent === playerMaquina &&casillas[2].textContent === playerMaquina &&casillas[0].textContent === '') {
                     responder(0);
-                    showWinLine([0,1,2], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,1,2]);
                 }
                 else if (casillas[3].textContent === playerMaquina &&casillas[4].textContent === playerMaquina &&casillas[5].textContent === '') {
                     responder(5);
-                    showWinLine([3,4,5], 'red');
-                    ganaMaquina();
+                    ganaMaquina([3,4,5]);
 
                 }
                 else if (casillas[4].textContent === playerMaquina &&casillas[5].textContent === playerMaquina &&casillas[3].textContent === '') {
                     responder(3);
-                    showWinLine([4,5,3], 'red');
-                    ganaMaquina();
+                    ganaMaquina([4,5,3]);
                 }
                 else if (casillas[6].textContent === playerMaquina &&casillas[7].textContent === playerMaquina &&casillas[8].textContent === '') {
                     responder(8);
-                    showWinLine([6,7,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([6,7,8]);
                 }
                 else if (casillas[7].textContent === playerMaquina &&casillas[8].textContent === playerMaquina &&casillas[6].textContent === '') {
                     responder(6);
-                    showWinLine([6,7,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([6,7,8]);
 
                 }
                 else if (casillas[0].textContent === playerMaquina &&casillas[3].textContent === playerMaquina &&casillas[6].textContent === '') {
                     responder(6);
-                    showWinLine([0,3,6], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,3,6]);
                 }
                 else if (casillas[3].textContent === playerMaquina &&casillas[6].textContent === playerMaquina &&casillas[0].textContent === '') {
                     responder(0);
-                    showWinLine([0,3,6], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,3,6]);
                 }
                 else if (casillas[1].textContent === playerMaquina &&casillas[4].textContent === playerMaquina &&casillas[7].textContent === '') {
                     responder(7);
-                    showWinLine([1,4,7], 'red');
-                    ganaMaquina();
+                    ganaMaquina([1,4,7]);
                 }
                 else if (casillas[4].textContent === playerMaquina &&casillas[7].textContent === playerMaquina &&casillas[1].textContent === '') {
                     responder(1);
-                    showWinLine([1,4,7], 'red');
-                    ganaMaquina();
+                    ganaMaquina([1,4,7]);
                 }
                 else if (casillas[2].textContent === playerMaquina &&casillas[5].textContent === playerMaquina &&casillas[8].textContent === '') {
                     responder(8);
-                    showWinLine([2,5,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([2,5,8]);
                 }
                 else if (casillas[5].textContent === playerMaquina &&casillas[8].textContent === playerMaquina &&casillas[2].textContent === '') {
                     responder(2);
-                    showWinLine([2,5,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([2,5,8]);
                 }
                 else if (casillas[0].textContent === playerMaquina &&casillas[4].textContent === playerMaquina &&casillas[8].textContent === '') {
                     responder(8);
-                    showWinLine([0,4,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,4,8]);
 
                 }
                 else if (casillas[4].textContent === playerMaquina &&casillas[8].textContent === playerMaquina &&casillas[0].textContent === '') {
                     responder(0);
-                    showWinLine([0,4,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,4,8]);
                 }
                 else if (casillas[2].textContent === playerMaquina &&casillas[4].textContent === playerMaquina &&casillas[6].textContent === '') {
                     responder(6);
-                    showWinLine([2,4,6], 'red');
-                    ganaMaquina();
+                    ganaMaquina([2,4,6]);
                 }
                 else if (casillas[4].textContent === playerMaquina &&casillas[6].textContent === playerMaquina &&casillas[2].textContent === '') {
                     responder(2);
-                    showWinLine([2,4,6], 'red');
-                    ganaMaquina();
+                    ganaMaquina([2,4,6]);
                 }
                 else if (casillas[0].textContent === playerMaquina &&casillas[2].textContent === playerMaquina &&casillas[1].textContent === '') {
                     responder(1);
-                    showWinLine([0,1,2], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,1,2]);
 
                 }
                 else if (casillas[3].textContent === playerMaquina &&casillas[5].textContent === playerMaquina &&casillas[4].textContent === '') {
                     responder(4);
-                    showWinLine([3,4,5], 'red');
-                    ganaMaquina();
+                    ganaMaquina([3,4,5]);
                 }
                 else if (casillas[6].textContent === playerMaquina &&casillas[8].textContent === playerMaquina &&casillas[7].textContent === '') {
                     responder(7);
-                    showWinLine([6,7,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([6,7,8]);
                 }
                 else if (casillas[0].textContent === playerMaquina &&casillas[6].textContent === playerMaquina &&casillas[3].textContent === '') {
 
                     responder(3);
-                    showWinLine([0,3,6], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,3,6]);
                 }
                 else if (casillas[1].textContent === playerMaquina &&casillas[7].textContent === playerMaquina &&casillas[4].textContent === '') {
                     responder(4);
-                    showWinLine([1,4,7], 'red');
-                    ganaMaquina();
+                    ganaMaquina([1,4,7]);
                 }
                 else if (casillas[2].textContent === playerMaquina &&casillas[8].textContent === playerMaquina &&casillas[5].textContent === '') {
                     responder(5);
-                    showWinLine([2,5,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([2,5,8]);
 
                 }
                 else if (casillas[0].textContent === playerMaquina &&casillas[8].textContent === playerMaquina &&casillas[4].textContent === '') {
                     responder(4);
-                    showWinLine([0,4,8], 'red');
-                    ganaMaquina();
+                    ganaMaquina([0,4,8]);
 
                 }
                 else if (casillas[2].textContent === playerMaquina &&casillas[6].textContent === playerMaquina &&casillas[4].textContent === '') {
                     responder(4);
-                    showWinLine([2,4,6], 'red');
-                    ganaMaquina();
+                    ganaMaquina([2,4,6]);
 
                 }
 
@@ -471,7 +448,7 @@ function imposible(){
                     }
                 }
                 else if (empiezaMedio) {
-                    let random = getRandomInt(1); 
+                    let random = random0to1(); 
                     if (defenderseSinAleatorio()){}//COMPROBAR SI RESPONDE
                     else if (((casillas[0].textContent === playerMaquina &&casillas[8].textContent === player)||(casillas[8].textContent === playerMaquina &&casillas[0].textContent === player))) {
                         if (random==0&&casillas[2].textContent === '') {
@@ -500,7 +477,7 @@ function imposible(){
                     }
                 }
                 else if (empiezaEsquina) {
-                    let random = getRandomInt(1);
+                    let random = random0to1();
                     if(defenderseSinAleatorio()) {}
                     //COMPROBAR SI RESPONDE //EN UNA ESQUINA CONTRARIA
                     else if ((casillas[0].textContent === player&&casillas[8].textContent === player)||(casillas[2].textContent === player&&casillas[6].textContent === player)) {
@@ -519,7 +496,9 @@ function imposible(){
                     }
                 }
                 else if (empiezaLado) {
-                    if (casillas[1].textContent === player&&casillas[3].textContent === player&&casillas[0].textContent === '') {
+                    
+                    if(defenderseSinAleatorio()){}
+                    else if (casillas[1].textContent === player&&casillas[3].textContent === player&&casillas[0].textContent === '') {
                         responder(0);
                     }
                     else if (casillas[1].textContent === player&&casillas[5].textContent === player&&casillas[2].textContent === '') {
@@ -531,9 +510,35 @@ function imposible(){
                     else if (casillas[7].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === '') {
                         responder(8);
                     }
+                    //Aqui empieza lo de Noor
+                    else if (casillas[7].textContent === player && casillas[2].textContent === player && casillas[8].textContent === ''){
+                        responder(8);
+                    }
+                    else if (casillas[7].textContent === player && casillas[0].textContent === player && casillas[6].textContent === '') {
+                        responder(6);
+                    }
+                    else if (casillas[3].textContent === player && casillas[2].textContent === player && casillas[0].textContent === ''){
+                        responder(0);
+                    }
+                    else if (casillas[3].textContent === player && casillas[8].textContent === player && casillas[6].textContent === ''){
+                        responder(6);
+                    }
+                    else if (casillas[1].textContent === player && casillas[6].textContent === player && casillas[0].textContent === ''){
+                        responder(0);
+                    }
+                    else if (casillas[1].textContent === player && casillas[8].textContent === player && casillas[2].textContent === ''){
+                        responder(2);
+                    }
+                    else if (casillas[5].textContent === player && casillas[0].textContent === player && casillas[2].textContent === ''){
+                        responder(2);
+                    }
+                    else if (casillas[5].textContent === player && casillas[6].textContent === player && casillas[8].textContent === ''){
+                        responder(8);
+                    }
                     else {
                         defenderse();
                     }
+                }
             }
         }
     }
@@ -557,7 +562,7 @@ function responder(num){
     }
 }
 
-function ganaMaquina() {
+function ganaMaquina(casillasGanadoras) {
     // // LocalImposible.setTurnoPlayer(true);
     // for (SquareButton squareButton : sqA) {
     // 	squareButton.setEnabled(false);
@@ -569,7 +574,9 @@ function ganaMaquina() {
     for(let casilla of casillas) {
         casilla.onclick = null;
     }
-    alert('Has perdido!')
+    
+    checkGameStatus('derrota');
+    clavesLinea = [casillasGanadoras, 'red']
     // JOptionPane.showMessageDialog(LocalMedio.contentPane, "Has perdido", "Derrota!", JOptionPane.ERROR_MESSAGE);
     // try {
     // 	String update = "UPDATE Usuarios SET DerrotasLocalImposible = DerrotasLocalImposible+1 WHERE Usuario=?";
@@ -722,7 +729,7 @@ function defenderse() {
     }
     //preparar ataque
     else if (casillas[0].textContent === playerMaquina &&casillas[1].textContent === ''&&casillas[2].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(1);
         }
@@ -731,7 +738,7 @@ function defenderse() {
         }
     }
     else if (casillas[0].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[8].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -740,7 +747,7 @@ function defenderse() {
         }
     }
     else if (casillas[0].textContent === playerMaquina &&casillas[3].textContent === ''&&casillas[6].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(3);
         }
@@ -749,7 +756,7 @@ function defenderse() {
         }
     }
     else if (casillas[1].textContent === playerMaquina &&casillas[0].textContent === ''&&casillas[2].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(0);
         }
@@ -758,7 +765,7 @@ function defenderse() {
         }
     }
     else if (casillas[1].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[7].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -767,7 +774,7 @@ function defenderse() {
         }
     }
     else if (casillas[2].textContent === playerMaquina &&casillas[1].textContent === ''&&casillas[0].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(1);
         }
@@ -776,7 +783,7 @@ function defenderse() {
         }
     }
     else if (casillas[2].textContent === playerMaquina &&casillas[5].textContent === ''&&casillas[8].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(5);
         }
@@ -785,7 +792,7 @@ function defenderse() {
         }
     }
     else if (casillas[2].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[6].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -794,7 +801,7 @@ function defenderse() {
         }
     }
     else if (casillas[3].textContent === playerMaquina &&casillas[0].textContent === ''&&casillas[6].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(0);
         }
@@ -803,7 +810,7 @@ function defenderse() {
         }
     }
     else if (casillas[3].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[5].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -812,7 +819,7 @@ function defenderse() {
         }
     }
     else if (casillas[4].textContent === playerMaquina &&casillas[0].textContent === ''&&casillas[8].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(0);
         }
@@ -821,7 +828,7 @@ function defenderse() {
         }
     }
     else if (casillas[4].textContent === playerMaquina &&casillas[1].textContent === ''&&casillas[7].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(1);
         }
@@ -830,7 +837,7 @@ function defenderse() {
         }
     }
     else if (casillas[4].textContent === playerMaquina &&casillas[2].textContent === ''&&casillas[6].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(2);
         }
@@ -839,7 +846,7 @@ function defenderse() {
         }
     }
     else if (casillas[4].textContent === playerMaquina &&casillas[3].textContent === ''&&casillas[5].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(3);
         }
@@ -848,7 +855,7 @@ function defenderse() {
         }
     }
     else if (casillas[5].textContent === playerMaquina &&casillas[3].textContent === ''&&casillas[8].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(3);
         }
@@ -857,7 +864,7 @@ function defenderse() {
         }
     }
     else if (casillas[5].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[3].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -866,7 +873,7 @@ function defenderse() {
         }
     }
     else if (casillas[6].textContent === playerMaquina &&casillas[0].textContent === ''&&casillas[3].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(0);
         }
@@ -875,7 +882,7 @@ function defenderse() {
         }
     }
     else if (casillas[6].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[2].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -884,7 +891,7 @@ function defenderse() {
         }
     }
     else if (casillas[6].textContent === playerMaquina &&casillas[7].textContent === ''&&casillas[8].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(7);
         }
@@ -893,7 +900,7 @@ function defenderse() {
         }
     }
     else if (casillas[7].textContent === playerMaquina &&casillas[6].textContent === ''&&casillas[8].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(6);
         }
@@ -902,7 +909,7 @@ function defenderse() {
         }
     }
     else if (casillas[7].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[1].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(1);
         }
@@ -911,7 +918,7 @@ function defenderse() {
         }
     }
     else if (casillas[8].textContent === playerMaquina &&casillas[4].textContent === ''&&casillas[0].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(4);
         }
@@ -920,7 +927,7 @@ function defenderse() {
         }
     }
     else if (casillas[8].textContent === playerMaquina &&casillas[5].textContent === ''&&casillas[2].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(5);
         }
@@ -929,7 +936,7 @@ function defenderse() {
         }
     }
     else if (casillas[8].textContent === playerMaquina &&casillas[7].textContent === ''&&casillas[6].textContent === '') {
-        let random = getRandomInt(1);
+        let random = random0to1();
         if (random==0) {
             responder(7);
         }
@@ -956,22 +963,11 @@ function defenderse() {
             empiezaEsquina=false;
             empiezaLado=false;
             checkGameStatus('empate');
-            // alert('Empate');
-            // JOptionPane.showMessageDialog(LocalMedio.contentPane, "Has empatado", "Empate!", JOptionPane.INFORMATION_MESSAGE);
-            // try {
-            // 	String update = "UPDATE Usuarios SET EmpatesLocalImposible = EmpatesLocalImposible+1 WHERE Usuario=?";
-            // 	ps = Aws.getConnection().prepareStatement(update);
-            // 	Aws.lanzar(ps, 1, Login.getUsuario(), Aws.STRING);
-            // 	ps.execute();
-            // } catch (SQLException e1) {
-            // 	e1.printStackTrace();
-            // }
         }
         else {
             do{
                 num = getRandomInt(9);
-                console.log(num)
-            } while(casillas[num].textContent !== '') //bucle infinito fixme:
+            } while(casillas[num].textContent !== '')
 
             responder(num);
                 // LocalImposible.setTurnoPlayer(true);
@@ -1139,5 +1135,96 @@ function defenderseSinAleatorio() {
     }
     else {
         return false;
+    }
+}
+
+function ganaJugador(casillasGanadoras) {
+    for(let casilla of casillas) {
+        casilla.onclick = null;
+    }
+    clavesLinea = [casillasGanadoras, 'green']
+    checkGameStatus('victoria');
+}
+
+function saberSiGanaJugador() {
+    let out = true;
+    if ((casillas[0].textContent === player&&casillas[1].textContent === player&&casillas[2].textContent === player)) {
+        ganaJugador([0,1,2]);
+    } else if((casillas[3].textContent === player&&casillas[4].textContent === player&&casillas[5].textContent === player)) {
+        ganaJugador([3,4,5]);
+    } else if((casillas[6].textContent === player&&casillas[7].textContent === player&&casillas[8].textContent === player)){
+        ganaJugador([6,7,8]);
+    } else if((casillas[0].textContent === player&&casillas[3].textContent === player&&casillas[6].textContent === player)){
+        ganaJugador([0,3,6]);
+    } else if((casillas[1].textContent === player&&casillas[4].textContent === player&&casillas[7].textContent === player)){
+        ganaJugador([1,4,7]);
+    } else if((casillas[2].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === player)){
+        ganaJugador([2,5,8]);
+    } else if((casillas[0].textContent === player&&casillas[4].textContent === player&&casillas[8].textContent === player)){
+        ganaJugador([0,4,8]);
+    } else if((casillas[2].textContent === player&&casillas[4].textContent === player&&casillas[6].textContent === player)){
+        ganaJugador([2,4,6]);
+    } else {
+        out = false;
+    }
+    return out;
+}
+
+function facil() {
+    for(const casilla of casillas){
+        casilla.onclick = (e) => {
+            // casilla.style.fontSize = '40px'
+            casilla.textContent = player;
+            casilla.style.color = 'green'
+            casillasMarcadas++;
+            e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
+            //SABER SI GANA EL JUGADOR
+            if (saberSiGanaJugador) {}
+            else {
+                let num;
+                let count=0;
+                for (const casilla of casillas) {
+                    if(casilla.textContent === '') {
+                        count++;
+                    }
+                }
+                if (count==0) {
+                    // LocalImposible.btnJugarDeNuevo.setVisible(true);
+                    // // LocalImposible.setTurnoPlayer(true);
+                    // // LocalImposible.actualizarEstado();
+                    empiezaMedio=false;
+                    empiezaEsquina=false;
+                    empiezaLado=false;
+                    checkGameStatus('empate');
+                }
+                else {
+                    do{
+                        num = getRandomInt(9);
+                    } while(casillas[num].textContent !== '')
+        
+                    responder(num);
+                    if ((casillas[0].textContent === playerMaquina&&casillas[1].textContent === playerMaquina&&casillas[2].textContent === playerMaquina)) {
+                        ganaMaquina([0,1,2]);
+                    } else if((casillas[3].textContent === playerMaquina&&casillas[4].textContent === playerMaquina&&casillas[5].textContent === playerMaquina)) {
+                        ganaMaquina([3,4,5]);
+                    } else if((casillas[6].textContent === playerMaquina&&casillas[7].textContent === playerMaquina&&casillas[8].textContent === playerMaquina)){
+                        ganaMaquina([6,7,8]);
+                    } else if((casillas[0].textContent === playerMaquina&&casillas[3].textContent === playerMaquina&&casillas[6].textContent === playerMaquina)){
+                        ganaMaquina([0,3,6]);
+                    } else if((casillas[1].textContent === playerMaquina&&casillas[4].textContent === playerMaquina&&casillas[7].textContent === playerMaquina)){
+                        ganaMaquina([1,4,7]);
+                    } else if((casillas[2].textContent === playerMaquina&&casillas[5].textContent === playerMaquina&&casillas[8].textContent === playerMaquina)){
+                        ganaMaquina([2,5,8]);
+                    } else if((casillas[0].textContent === playerMaquina&&casillas[4].textContent === playerMaquina&&casillas[8].textContent === playerMaquina)){
+                        ganaMaquina([0,4,8]);
+                    } else if((casillas[2].textContent === playerMaquina&&casillas[4].textContent === playerMaquina&&casillas[6].textContent === playerMaquina)){
+                        ganaMaquina([2,4,6]);
+                    }
+                        // LocalImposible.setTurnoPlayer(true);
+                        // LocalImposible.actualizarEstado();
+                    
+                }
+            }
+        }
     }
 }
