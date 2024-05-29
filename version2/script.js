@@ -1179,7 +1179,7 @@ function facil() {
             casillasMarcadas++;
             e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
             //SABER SI GANA EL JUGADOR
-            if (saberSiGanaJugador) {}
+            if (saberSiGanaJugador()) {}
             else {
                 let num;
                 let count=0;
