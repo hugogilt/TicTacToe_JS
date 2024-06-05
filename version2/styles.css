@@ -92,6 +92,10 @@ h1 {
         height: 100px; /* Reducir la altura de las celdas */
         font-size: 1.5em; /* Reducir el tamaño de la fuente */
     }
+
+    .modal-content {
+        margin: 15% auto;
+    }
     
 }
 

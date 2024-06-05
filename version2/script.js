@@ -90,7 +90,7 @@ let player = '';
 let playerMaquina = '';
 const botonesNiveles = document.querySelectorAll('.niveles');
 const botonesFicha = document.querySelectorAll('.ficha');
-const casillas = document.querySelectorAll('.cell');
+const casillas = Array.from(document.querySelectorAll('.cell'));
 const fichaSinElegir = document.createElement('p');
 const nivelSinElegir = document.createElement('p');
 let nivelElegido = undefined;
@@ -336,7 +336,8 @@ function imposible(){
                 }
                 else if (empiezaMedio) {
                     let random = random0to1(); 
-                    if (defenderseSinAleatorio()){}//COMPROBAR SI RESPONDE
+                    if (defenderseSinAleatorio()){}
+                    //COMPROBAR SI RESPONDE EN UNA ESQUINA CONTRARIA
                     else if (((casillas[0].textContent === playerMaquina &&casillas[8].textContent === player)||(casillas[8].textContent === playerMaquina &&casillas[0].textContent === player))) {
                         if (random==0&&casillas[2].textContent === '') {
                             responder(2);
@@ -347,7 +348,7 @@ function imposible(){
                         else {
                             defenderse();
                         }
-                    }							//EN UNA ESQUINA CONTRARIA
+                    }					
                     else if ((casillas[2].textContent === playerMaquina &&casillas[6].textContent === player)||(casillas[6].textContent === playerMaquina &&casillas[2].textContent === player)) {
                         if (random==0&&casillas[0].textContent === '') {
                             responder(0);
@@ -441,8 +442,7 @@ function responder(num){
         else {
             casillas[num].textContent = 'X';
         }
-        // // LocalImposible.setTurnoPlayer(true);
-		// // LocalImposible.actualizarEstado();
+
     }
     else {
         alert('Estás intentando responder sobre una casilla ocupada, revisa el código')
@@ -575,142 +575,77 @@ function ganaMaquina(casillasGanadoras) {
 
 function defenderse() {
     if (casillas[0].textContent === player&&casillas[1].textContent === player&&casillas[2].textContent === '') {
-
         responder(2);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
 
     }
     else if (casillas[1].textContent === player&&casillas[2].textContent === player&&casillas[0].textContent === '') {
         responder(0);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[3].textContent === player&&casillas[4].textContent === player&&casillas[5].textContent === '') {
         responder(5);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     else if (casillas[4].textContent === player&&casillas[5].textContent === player&&casillas[3].textContent === '') {
         responder(3);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[6].textContent === player&&casillas[7].textContent === player&&casillas[8].textContent === '') {
         responder(8);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[7].textContent === player&&casillas[8].textContent === player&&casillas[6].textContent === '') {
         responder(6);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     else if (casillas[0].textContent === player&&casillas[3].textContent === player&&casillas[6].textContent === '') {
         responder(6);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[3].textContent === player&&casillas[6].textContent === player&&casillas[0].textContent === '') {
         responder(0);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[1].textContent === player&&casillas[4].textContent === player&&casillas[7].textContent === '') {
         responder(7);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[4].textContent === player&&casillas[7].textContent === player&&casillas[1].textContent === '') {
         responder(1);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[2].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === '') {
         responder(8);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[5].textContent === player&&casillas[8].textContent === player&&casillas[2].textContent === '') {
         responder(2);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[0].textContent === player&&casillas[4].textContent === player&&casillas[8].textContent === '') {
         responder(8);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     else if (casillas[4].textContent === player&&casillas[8].textContent === player&&casillas[0].textContent === '') {
         responder(0);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[2].textContent === player&&casillas[4].textContent === player&&casillas[6].textContent === '') {
         responder(6);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[4].textContent === player&&casillas[6].textContent === player&&casillas[2].textContent === '') {
         responder(2);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[0].textContent === player&&casillas[2].textContent === player&&casillas[1].textContent === '') {
         responder(1);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     else if (casillas[3].textContent === player&&casillas[5].textContent === player&&casillas[4].textContent === '') {
         responder(4);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[6].textContent === player&&casillas[8].textContent === player&&casillas[7].textContent === '') {
         responder(7);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[0].textContent === player&&casillas[6].textContent === player&&casillas[3].textContent === '') {
         responder(3);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[1].textContent === player&&casillas[7].textContent === player&&casillas[4].textContent === '') {
         responder(4);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
     }
     else if (casillas[2].textContent === player&&casillas[8].textContent === player&&casillas[5].textContent === '') {
         responder(5);
-
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     else if (casillas[0].textContent === player&&casillas[8].textContent === player&&casillas[4].textContent === '') {
         responder(4);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     else if (casillas[2].textContent === player&&casillas[6].textContent === player&&casillas[4].textContent === '') {
         responder(4);
-        // LocalImposible.setTurnoPlayer(true);
-        // LocalImposible.actualizarEstado();
-
     }
     //preparar ataque
     else if (casillas[0].textContent === playerMaquina &&casillas[1].textContent === ''&&casillas[2].textContent === '') {
@@ -1107,7 +1042,6 @@ function responderAleatoriamente(){
 function facil() {
     for(const casilla of casillas){
         casilla.onclick = (e) => {
-            // casilla.style.fontSize = '40px'
             casilla.textContent = player;
             casilla.style.color = 'green'
             casillasMarcadas++;
@@ -1135,6 +1069,186 @@ function medio() {
             else if (defenderseSinAleatorio()){}
             else {
                 responderAleatoriamente();
+            }
+        }
+    }
+}
+
+function dificil() {
+    for(const casilla of casillas){
+        casilla.onclick = (e) => {
+            casilla.textContent = player;
+            casilla.style.color = 'green'
+            casillasMarcadas++;
+            e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
+            //SABER SI GANA EL JUGADOR
+            debugger;
+            if (saberSiGanaJugador()) {
+                empiezaMedio=false;
+                empiezaEsquina=false;
+                empiezaLado=false;
+            }
+            else {
+                if (casillasMarcadas != 1) {
+                    maquinaIntentaGanar();
+                }
+                if (casillasMarcadas==1) {
+                    let randomDecision = getRandomInt(3);
+                    if (casillas[4].textContent === player) {
+                        empiezaMedio=true;
+                        if (randomDecision == 0 || randomDecision == 1) {
+                            let random = getRandomInt(4);
+                            if (random==0) {
+                                responder(0);
+                            }
+                            else if (random==1) {
+                                responder(2);
+                            }
+                            else if (random==2) {
+                                responder(6);
+                            }
+                            else if (random==3) {
+                                responder(8);
+                            }
+                        }
+                        else if (randomDecision==2) {
+                            let random = getRandomInt(4);
+                            if (random==0) {
+                                responder(1);
+                            }
+                            else if (random==1) {
+                                responder(3);
+                            }
+                            else if (random==2) {
+                                responder(5);
+                            }
+                            else if (random==3) {
+                                responder(7);
+                            }
+                        }
+
+                    }
+                    else if (casillas[0].textContent === player||casillas[2].textContent === player||casillas[6].textContent === player||casillas[8].textContent === player) {
+                        empiezaEsquina=true;
+                        if (randomDecision==0 || randomDecision==1) {
+                            responder(4);
+                        }
+                        else if (randomDecision==2) {
+                            let casillaOcupada;
+                            let casillasDisponibles = [casillas[0], casillas[1], casillas[2], casillas[3], casillas[5], casillas[6], casillas[7], casillas[8]]
+                            if (casillas[0].textContent === player) {
+                                casillaOcupada = casillas[0];
+                            } else if (casillas[2].textContent === player) {
+                                casillaOcupada = casillas[2];
+                            } else if (casillas[6].textContent === player) {
+                                casillaOcupada = casillas[6];
+                            } else if (casillas[8].textContent === player) {
+                                casillaOcupada = casillas[8];
+                            }
+                            casillasDisponibles = casillasDisponibles.filter(item => item !== casillaOcupada);
+                            let random = getRandomInt(7);
+                            responder(casillas.indexOf(casillasDisponibles[random]));
+                            
+                        }
+                        
+                    }
+                    else if (casillas[1].textContent === player||casillas[3].textContent === player||casillas[5].textContent === player||casillas[7].textContent === player) {
+                        empiezaLado=true;
+                        responder(4);
+                    }
+                }
+                else if (empiezaMedio) {
+                    let random = random0to1();
+                    if (defenderseSinAleatorio()){}
+                    //COMPROBAR SI RESPONDE EN UNA ESQUINA CONTRARIA
+                    else if (((casillas[0].textContent === playerMaquina&&casillas[8].textContent === player)||(casillas[8].textContent === playerMaquina&&casillas[0].textContent === player))) {
+                        if (random==0&&casillas[2].textContent === '') {
+                            responder(2);
+                        }
+                        else if (random==1&&casillas[6].textContent === '') {
+                            responder(6);
+                        }
+                        else {
+                            defenderse();
+                        }
+                    }							
+                    else if ((casillas[2].textContent === playerMaquina&&casillas[6].textContent === player)||(casillas[6].textContent === playerMaquina&&casillas[2].textContent === player)) {
+                        if (random==0&&casillas[0].textContent === '') {
+                            responder(0);
+                        }
+                        else if (random==1&&casillas[8].textContent === '') {
+                            responder(8);
+                        }
+                        else {
+                            defenderse();
+                        }
+                    }
+                    else { //DEFENDERSE
+                        defenderse();
+                    }
+                }
+                else if (empiezaEsquina) {
+                    let random = random0to1();
+                    if(defenderseSinAleatorio()) {}
+                    //COMPROBAR SI RESPONDE EN UNA ESQUINA CONTRARIA
+                    else if ((casillas[0].textContent === player&&casillas[8].textContent === player)||(casillas[2].textContent === player&&casillas[6].textContent === player)) {
+                        if (random==0&&casillas[1].textContent === '') {
+                            responder(1);
+                        }
+                        else if (random==1&&casillas[7].textContent === '') {
+                            responder(7);
+                        }
+                        else {
+                            defenderse();
+                        }
+                    }							
+                    else { //DEFENDERSE
+                        defenderse();
+                    }
+                }
+                else if (empiezaLado) {
+                    if (defenderseSinAleatorio()) {}
+                    else if (casillas[1].textContent === player&&casillas[3].textContent === player&&casillas[0].textContent === '') {
+                        responder(0);
+                    }
+                    else if (casillas[1].textContent === player&&casillas[5].textContent === player&&casillas[2].textContent === '') {
+                        responder(2);
+                    }
+                    else if (casillas[3].textContent === player&&casillas[7].textContent === player&&casillas[6].textContent === '') {
+                        responder(6);
+                    }
+                    else if (casillas[7].textContent === player&&casillas[5].textContent === player&&casillas[8].textContent === '') {
+                        responder(8);
+                    }
+                    //Aqui empieza lo de Noor
+                    else if (casillas[7].textContent === player && casillas[2].textContent === player && casillas[8].textContent === ''){
+                        responder(8);
+                    }
+                    else if (casillas[7].textContent === player && casillas[0].textContent === player && casillas[6].textContent === '') {
+                        responder(6);
+                    }
+                    else if (casillas[3].textContent === player && casillas[2].textContent === player && casillas[0].textContent === ''){
+                        responder(0);
+                    }
+                    else if (casillas[3].textContent === player && casillas[8].textContent === player && casillas[6].textContent === ''){
+                        responder(6);
+                    }
+                    else if (casillas[1].textContent === player && casillas[6].textContent === player && casillas[0].textContent === ''){
+                        responder(0);
+                    }
+                    else if (casillas[1].textContent === player && casillas[8].textContent === player && casillas[2].textContent === ''){
+                        responder(2);
+                    }
+                    else if (casillas[5].textContent === player && casillas[0].textContent === player && casillas[2].textContent === ''){
+                        responder(2);
+                    }
+                    else if (casillas[5].textContent === player && casillas[6].textContent === player && casillas[8].textContent === ''){
+                        responder(8);
+                    }
+                    else {
+                        defenderse();
+                    }
+                }
             }
         }
     }
