@@ -378,8 +378,24 @@ function imposible(){
                         else {
                             defenderse();
                         }
-                    }							
-                    else { //DEFENDERSE
+                    //COMPROBAR SI RESPONDE EN UN MEDIO OPUESTO A LA ESQUINA DONDE HAYA EMPEZADO
+                    } else if ((casillas[0].textContent === player&&casillas[7].textContent === player)) {
+                        responder(6);
+                    } else if((casillas[0].textContent === player&&casillas[5].textContent === player)) {
+                        responder(2);
+                    } else if((casillas[2].textContent === player&&casillas[7].textContent === player)) {
+                        responder(8);
+                    } else if((casillas[2].textContent === player&&casillas[3].textContent === player)) {
+                        responder(0);
+                    } else if((casillas[6].textContent === player&&casillas[1].textContent === player)) {
+                        responder(0);
+                    } else if((casillas[6].textContent === player&&casillas[5].textContent === player)) {
+                        responder(8);
+                    } else if((casillas[8].textContent === player&&casillas[1].textContent === player)) {
+                        responder(2);
+                    } else if((casillas[8].textContent === player&&casillas[3].textContent === player)) {
+                        responder(6);
+                    } else { //DEFENDERSE
                         defenderse();
                     }
                 }
