@@ -75,7 +75,7 @@ h1 {
 #enlaces {
   margin-top: 1em;
   display: grid;
-  grid-template-columns: 149px 2px 149px;
+  grid-template-columns: 130px 2px 130px;
   gap: 0.5em;
   justify-content: center;
 }
