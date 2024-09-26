@@ -71,7 +71,7 @@ h1 {
     background-color: #f1f1f1;
 }
 
-// Centrado botones reiniciar e inicio
+/* Centrado botones reiniciar e inicio */
 #enlaces {
   margin-top: 1em;
   display: grid;
@@ -89,7 +89,7 @@ h1 {
   margin-left: 2px;
 }
 
-// Dibujado de la línea que aparece cuando pierdes o ganas
+/* Dibujado de la línea que aparece cuando pierdes o ganas */
 .win-line {
     position: absolute;
     height: 5px;
