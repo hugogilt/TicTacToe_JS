@@ -379,21 +379,21 @@ function imposible(){
                             defenderse();
                         }
                     //COMPROBAR SI RESPONDE EN UN MEDIO OPUESTO A LA ESQUINA DONDE HAYA EMPEZADO
-                    } else if ((casillas[0].textContent === player&&casillas[7].textContent === player)) {
+                    } else if ((casillas[0].textContent === player&&casillas[7].textContent === player) && casillas[6].textContent === '') {
                         responder(6);
-                    } else if((casillas[0].textContent === player&&casillas[5].textContent === player)) {
+                    } else if((casillas[0].textContent === player&&casillas[5].textContent === player) && casillas[2].textContent === '') {
                         responder(2);
-                    } else if((casillas[2].textContent === player&&casillas[7].textContent === player)) {
+                    } else if((casillas[2].textContent === player&&casillas[7].textContent === player) && casillas[8].textContent === '') {
                         responder(8);
-                    } else if((casillas[2].textContent === player&&casillas[3].textContent === player)) {
+                    } else if((casillas[2].textContent === player&&casillas[3].textContent === player) && casillas[0].textContent === '') {
                         responder(0);
-                    } else if((casillas[6].textContent === player&&casillas[1].textContent === player)) {
+                    } else if((casillas[6].textContent === player&&casillas[1].textContent === player) && casillas[0].textContent === '') {
                         responder(0);
-                    } else if((casillas[6].textContent === player&&casillas[5].textContent === player)) {
+                    } else if((casillas[6].textContent === player&&casillas[5].textContent === player) && casillas[8].textContent === '') {
                         responder(8);
-                    } else if((casillas[8].textContent === player&&casillas[1].textContent === player)) {
+                    } else if((casillas[8].textContent === player&&casillas[1].textContent === player) && casillas[2].textContent === '') {
                         responder(2);
-                    } else if((casillas[8].textContent === player&&casillas[3].textContent === player)) {
+                    } else if((casillas[8].textContent === player&&casillas[3].textContent === player) && casillas[6].textContent === '') {
                         responder(6);
                     } else { //DEFENDERSE
                         defenderse();
