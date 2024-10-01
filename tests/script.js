@@ -94,10 +94,42 @@ const botonesFicha = document.querySelectorAll('.ficha');
 const casillas = Array.from(document.querySelectorAll('.cell'));
 const fichaSinElegir = document.createElement('p');
 const nivelSinElegir = document.createElement('p');
+const settings = document.querySelector('.settings');
 let nivelElegido = undefined;
 let fichaElegida = undefined;
+// Selecciona todos los botones de la página
+const buttons = document.querySelectorAll('button');
+const difficultyButtons = document.querySelectorAll('.niveles');
+    const fichaButtons = document.querySelectorAll('.ficha');
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar los botones de dificultad y de fichas por separado
+
+    // Función para manejar la activación de botones en la sección de dificultad
+    difficultyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Quitar la clase 'active' de todos los botones de dificultad
+            difficultyButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Añadir la clase 'active' al botón que fue clicado
+            button.classList.add('active');
+        });
+    });
+
+    // Función para manejar la activación de botones en la sección de fichas
+    fichaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Quitar la clase 'active' de todos los botones de fichas
+            fichaButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Añadir la clase 'active' al botón que fue clicado
+            button.classList.add('active');
+        });
+    });
+});
 
 
+window.scrollTo(0, document.body.scrollHeight);
 cambioPantallaInicio();
 
 for(let boton of botonesNiveles){
@@ -164,8 +196,14 @@ document.querySelector('#jugarbtn').onclick = () => {
 }
 
 function cambioPantallaInicio() {
+    // Quitar la clase 'active' de todos los botones de dificultad
+    difficultyButtons.forEach(btn => btn.classList.remove('active'));
+    // Quitar la clase 'active' de todos los botones de fichas
+    fichaButtons.forEach(btn => btn.classList.remove('active'));
     const elementosJuego = document.querySelectorAll('.juego');
     const elementosInicio = document.querySelectorAll('.inicio');
+    settings.style.gridRow = "2";
+    settings.style.alignSelf = "start";
     for(let elementoJuego of elementosJuego){
         elementoJuego.classList.add('hidden')
     }
@@ -189,6 +227,8 @@ function cambioPantallaJuego(){
     }
     document.querySelector('#difficulty').textContent = difficultyTextJuego+nivelElegido.textContent;
     document.querySelector('#player-choice').textContent = playerChoiceTextJuego+fichaElegida.textContent;
+    settings.style.gridRow = "1";
+    settings.style.alignSelf = "center";
     player = fichaElegida.textContent;
     playerMaquina = player === 'X' ? 'O' : 'X';
     if (botonesNiveles[0] === nivelElegido) {
