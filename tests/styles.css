@@ -166,6 +166,14 @@ transform: translateY(0);
     .modal-content {
         margin: 15% auto;
     }
+    .board {
+      width: 70vw; /* Ajustar a un 90% del ancho de la pantalla */
+      height: 70vw; /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+      max-height: 70vh; /* Limitar la altura a un 90% de la altura de la pantalla */
+      max-width: 70vh; /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+      margin: 0 auto;
+    }  
+  
 }
 
 @media (max-height: 450px) {
