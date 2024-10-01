@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-window.scrollTo(0, document.body.scrollHeight);
 cambioPantallaInicio();
 
 for(let boton of botonesNiveles){
