@@ -1,6 +1,3 @@
-html {
-
-}
 
 body {
     display: flex;
@@ -11,12 +8,12 @@ body {
     margin: 0;
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 .container {
     text-align: center;
     display: grid;
-
     grid-template-rows: 1fr 1fr 1fr;
     height: 100vh; /* El contenedor ocupa el 100% del alto de la ventana */
     gap: 0;
@@ -24,18 +21,21 @@ body {
 }
 
 h1 {
-    
     margin-top: 0px;
+    font-size: 2.5em;
 }
 
 .settings {
-    margin-bottom: 20px;
-}
-
-#one {
-  grid-row: 1;
+  grid-row: 2;
   align-self: center;
 }
+
+#start {
+    grid-row: 2;
+    align-self: center;
+  }
+
+
 
 .board {
     display: grid;
@@ -49,6 +49,7 @@ h1 {
     grid-row: 2;
     height: 100%;
     aspect-ratio: 1 / 1;
+    align-self: center;
 }
 
 .cell {
@@ -86,23 +87,50 @@ h1 {
     background-color: #f1f1f1;
 }
 
+#volverArrow {
+    display: block;
+    margin: 1em auto 0;
+    background-color: white;
+    height: 4em;
+    width: 4em;
+    color: black;
+    border: solid 1px gray;
+    border-radius: 12px;
+}
+
+#volverArrow img {
+
+    height: 2.5em;
+    width: 2.5em;
+    margin: 0 0 -0.2em -0.35em;
+
+}
+
 #enlaces {
   margin-top: 1em;
   display: grid;
-  grid-template-columns: 130px 2px 130px;
+  grid-template-columns: 130px 80px 130px;
   gap: 0.5em;
   justify-content: center;
   grid-row: 3;
   align-self: start;
 }
 
-#reiniciarbtn {
+#enlaces button {
+    background-color: blue;
+    margin: 0;
+}
+
+#ajustesbtn {
   justify-self: end;
 }
 
 #iniciobtn {
   justify-self: start;
   margin-left: 2px;
+}
+#fichasBtns {
+  margin: 1em 0;
 }
 
 .win-line {
@@ -113,28 +141,73 @@ h1 {
     transform-origin: 0 0; /* Cambiado a 0 0 para ajustes más fáciles */
 }
 
+/*Estilos para los botones*/
+button {
+    background-color: blue; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 0.5em 1em; /* Espaciado interno */
+    text-align: center; /* Alinear texto al centro */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Para que se comporten como un elemento en línea */
+    margin: 4px 2px; /* Margen alrededor de los botones */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+  
+}
+
+button:not(#enlaces button) {
+    font-size: 1.3em;
+}
+
+
+
+button:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+}
+
+button.niveles:hover, button.ficha:hover, #jugarbtn:hover{
+    transform: translateY(-2px); /* Ligera elevación al pasar el ratón */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+}
+
+button:disabled {
+    background-color: green; /* Color de fondo cuando está activo */
+    transition: none; /* Desactiva la transición */
+}
+
+button:active {
+      transform: translateY(0); /* Regresa a su posición normal cuando se hace clic */
+}
+button:disabled:hover {
+    background-color: green; /* Mantiene el color de fondo cuando está activo */
+transform: translateY(0);
+}
+
+
 
 @media (max-width: 600px) {
-    .board {
-        grid-template-columns: repeat(3, 100px); /* Reducir el ancho de las columnas */
-        grid-template-rows: repeat(3, 100px); /* Reducir la altura de las filas */
-        border-width: 3px; /* Reducir el grosor del borde */
-    }
-
-    .cell {
-        width: 100px; /* Reducir el ancho de las celdas */
-        height: 100px; /* Reducir la altura de las celdas */
-        font-size: 1.5em; /* Reducir el tamaño de la fuente */
-    }
-
     .modal-content {
         margin: 15% auto;
     }
+    .board {
+      width: 70vw; /* Ajustar a un 90% del ancho de la pantalla */
+      height: 70vw; /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+      max-height: 70vh; /* Limitar la altura a un 90% de la altura de la pantalla */
+      max-width: 70vh; /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+      margin: 0 auto;
+    }  
+  
 }
 
-.hidden {
-    display: none;
+@media (max-height: 450px) {
+  body {
+    overflow: auto;
   }
+}
 
 /* Estilos para el modal */
 .modal {

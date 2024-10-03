@@ -9,48 +9,15 @@
 </head>
 <body>
     <div class="container">
-      <div id="one">
-        <h1 class="juego">Tic Tac Toe</h1>
-        <div class="settings">
-            <p id="difficulty"></p>
-            <div id="nivelesBtns" class="inicio">
-                <button class="niveles inicio">Fácil</button>
-                <button class="niveles inicio">Medio</button>
-                <button class="niveles inicio">Difícil</button>
-                <button class="niveles inicio">Imposible</button>
-            </div>
-            <p id="player-choice"></p>
-            <div id="fichasBtns">
-                <button class="ficha inicio">X</button>
-                <button class="ficha inicio">O</button>
-            </div>
-        </div>
-        <button id="jugarbtn" class="inicio">Jugar</button>
-        </div>
-          <div class="board juego">
-            <div class="cell juego" data-index="0"></div>
-            <div class="cell juego" data-index="1"></div>
-            <div class="cell juego" data-index="2"></div>
-            <div class="cell juego" data-index="3"></div>
-            <div class="cell juego" data-index="4"></div>
-            <div class="cell juego" data-index="5"></div>
-            <div class="cell juego" data-index="6"></div>
-            <div class="cell juego" data-index="7"></div>
-            <div class="cell juego" data-index="8"></div>
-          </div>
-        <div id="enlaces">
-            <button id="reiniciarbtn" class="juego">Reiniciar</button>
-            <span id="separacion" class="juego"> | </span>
-            <button id="iniciobtn" class="juego" >Volver al inicio</button>
-        </div>
-        <div class="win-line"></div>
-        <!-- Modal -->
-        <div id="resultadoModal" class="modal" onclick="closeModal()">
-            <div class="modal-content">
-              <p id="resultadoMensaje"></p>
-            </div>
-        </div>
-    </div>
-    <script src="script.js"></script>
+       <div id="start">
+         <h1>Tic Tac Toe</h1>
+          <button onclick = "cargarHTML('pagina3')">1 vs 1</button>
+          <button onclick = "cargarHTML('pagina2')">1 vs CPU</button>
+       </div>
+     </div>
+          
+        
+        
+    <script src="script.js" id= "script"></script>
 </body>
 </html>
