@@ -247,6 +247,7 @@ function reiniciar() {
       imposible();
     }
   } else {
+    turnoPlayer = 0;
     PvP();
   }
 }
