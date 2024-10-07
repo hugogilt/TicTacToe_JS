@@ -1,86 +1,174 @@
-html {
-    --cell-size: 125px;
-}
-
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background-image: url(../img/menu_background.jpg);
+  background-size: cover;
 }
 
 .container {
-    text-align: center;
+  text-align: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 100vh;
+  /* El contenedor ocupa el 100% del alto de la ventana */
+  gap: 0;
+
 }
 
 h1 {
-    margin-bottom: 20px;
+  margin-top: 0px;
+  font-size: 3.5em;
+  color: white;
+  background-color: #B49DBC;
+  border-radius: 12px;
+  padding: 0.3em;
 }
 
 .settings {
-    margin-bottom: 20px;
+  grid-row: 2;
+  align-self: center;
+  display: inline;
 }
 
+#start {
+  grid-row: 2;
+  align-self: center;
+}
+
+#turno-player-text {
+  background-color: white;
+  width: auto;
+  align-self: end;
+  display: inline-block;
+  padding: 1em;
+  border: solid 2px rgb(185, 142, 126);
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+#players {
+  background-color: #fff;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 0 1em;
+  border: solid 2px rgb(185, 142, 126);
+  border-radius: 8px;
+}
+
+#player1-choice {
+  color: #6EBB6E;
+  font-weight: bold;
+}
+
+#player2-choice {
+  color: #D86E6D;
+  font-weight: bold;
+}
+
+
+
+
+
 .board {
-    display: grid;
-    grid-template-columns: repeat(3, var(--cell-size));
-    grid-template-rows: repeat(3, var(--cell-size));
-    gap: 0;
-    border: 5px solid #000000; /* Borde alrededor de la tabla */
-    background-color: #ffffff;
-    box-sizing: border-box;
-    position: relative; /* Necesario para posicionamiento absoluto de la línea */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0;
+  border: 5px solid rgb(185, 142, 126);
+  /* Borde alrededor de la tabla */
+  background-color: #ffffff;
+  box-sizing: border-box;
+  position: relative;
+  /* Necesario para posicionamiento absoluto de la línea */
+  grid-row: 2;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  align-self: center;
 }
 
 .cell {
-    width: var(--cell-size);
-    height: var(--cell-size);
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-sizing: border-box;
-    position: relative; /* Necesario para posicionamiento absoluto de la línea */
+  width: auto;
+  height: auto;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  /* Necesario para posicionamiento absoluto de la línea */
 }
 
-.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
-    border-bottom: 5px solid #000000;
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-bottom: 5px solid rgb(185, 142, 126);
 }
 
-.cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) {
-    border-right: 5px solid #000000;
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+  border-right: 5px solid rgb(185, 142, 126);
 }
 
-.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
-    border-top: 5px solid #000000;
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+  border-top: 5px solid rgb(185, 142, 126);
 }
 
-.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
-    border-left: 5px solid #000000;
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+  border-left: 5px solid rgb(185, 142, 126);
 }
 
 .cell:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
-/* Centrado botones reiniciar e inicio */
+#volverArrow {
+  display: block;
+  margin: 1em auto 0;
+  background-color: white;
+  height: 4em;
+  width: 4em;
+  color: black;
+  border: solid 1px gray;
+  border-radius: 12px;
+  grid-row: 3;
+}
+
+#volverArrow img {
+
+  height: 2.5em;
+  width: 2.5em;
+  margin: 0 0 -0.2em -0.35em;
+
+}
+
 #enlaces {
   margin-top: 1em;
   display: grid;
-  grid-template-columns: 130px 2px 130px;
+  grid-template-columns: 130px 80px 130px;
   gap: 0.5em;
   justify-content: center;
+  grid-row: 3;
+  align-self: start;
 }
 
-#reiniciarbtn {
+
+#ajustesbtn {
   justify-self: end;
 }
 
@@ -89,75 +177,183 @@ h1 {
   margin-left: 2px;
 }
 
-/* Dibujado de la línea que aparece cuando pierdes o ganas */
-.win-line {
-    position: absolute;
-    height: 5px;
-    background-color: red;
-    z-index: 2;
-    transform-origin: 0 0; /* Cambiado a 0 0 para ajustes más fáciles */
+#fichasBtns {
+  margin: 1em 0;
 }
 
+.win-line {
+  position: absolute;
+  height: 5px;
+  background-color: red;
+  z-index: 2;
+  transform-origin: 0 0;
+  /* Cambiado a 0 0 para ajustes más fáciles */
+}
+
+/*Estilos para los botones*/
+button {
+  background-color: #9BD8D6;
+  /* Color de fondo */
+  color: white;
+  /* Color del texto */
+  padding: 0.5em 1em;
+  /* Espaciado interno */
+  text-align: center;
+  /* Alinear texto al centro */
+  text-decoration: none;
+  /* Sin subrayado */
+  display: inline-block;
+  /* Para que se comporten como un elemento en línea */
+  margin: 4px 2px;
+  /* Margen alrededor de los botones */
+  cursor: pointer;
+  /* Cambia el cursor al pasar sobre el botón */
+  border: none;
+  /* Sin borde */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  position: relative;
+
+
+}
+
+button:not(#volverArrow)::before,
+button:not(#volverArrow)::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  background: #9BD8D6;
+  transition: width .5s;
+
+}
+
+
+button:not(#volverArrow)::after {
+  left: 0;
+  bottom: -10px;
+
+}
+
+button:not(#volverArrow)::before {
+  right: 0;
+  top: -10px;
+
+}
+
+button:not(#volverArrow):hover::after,
+button:not(#volverArrow):hover::before {
+  width: 100%;
+}
+
+
+
+
+
+button:not(#enlaces button) {
+  font-size: 1.3em;
+}
+
+
+
+button:disabled {
+  background-color: #E1B6A6;
+  /* Color de fondo cuando está activo */
+}
+
+
+button:disabled:hover {
+  background-color: #E1B6A6;
+  /* Mantiene el color de fondo cuando está activo */
+}
+
+button:not(#volverArrow):disabled:before,
+button:not(#volverArrow):disabled:after {
+  background: #E1B6A6;
+}
+
+#enlaces button {
+  background-color: #9BD8D6;
+  margin: 0;
+}
+
+#enlaces button::after {
+  bottom: -7px;
+}
+
+#enlaces button::before {
+  top: -7px;
+}
 
 @media (max-width: 600px) {
-    .board {
-        grid-template-columns: repeat(3, 100px); /* Reducir el ancho de las columnas */
-        grid-template-rows: repeat(3, 100px); /* Reducir la altura de las filas */
-        border-width: 3px; /* Reducir el grosor del borde */
-    }
+  .modal-content {
+    margin: 15% auto;
+  }
 
-    .cell {
-        width: 100px; /* Reducir el ancho de las celdas */
-        height: 100px; /* Reducir la altura de las celdas */
-        font-size: 1.5em; /* Reducir el tamaño de la fuente */
-    }
+  .board {
+    width: 70vw;
+    /* Ajustar a un 90% del ancho de la pantalla */
+    height: 70vw;
+    /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+    max-height: 70vh;
+    /* Limitar la altura a un 90% de la altura de la pantalla */
+    max-width: 70vh;
+    /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+    margin: 0 auto;
+  }
 
-    .modal-content {
-        margin: 15% auto;
-    }
-    
+  button:not(#enlaces button) {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
 }
 
-.hidden {
-    display: none;
+@media (max-height: 450px) {
+  body {
+    overflow: auto;
   }
+}
 
 /* Estilos para el modal */
 .modal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 3;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4); /* Fondo oscuro */
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: 4% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  .close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close-button:hover,
-  .close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  display: none;
+  /* Oculto por defecto */
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fondo oscuro */
+}
 
+.modal-content {
+  background-color: #fefefe;
+  margin: 4% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 16px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
 
-  
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
