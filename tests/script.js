@@ -32,8 +32,6 @@ const paginas = {
     <div class="container">
         <div class="settings">
             <h1 class="juego">Tic Tac Toe</h1>
-            <p id="difficulty"></p>
-            <p id="player-choice"></p>
         </div>
         <div class="board juego">
             <div class="cell juego" data-index="0"></div>
@@ -76,12 +74,14 @@ let casillasMarcadas = 0;
 let player = '';
 let playerMaquina = '';
 let turnoPlayer = 0;
+let turnoPlayerText;
 let color;
 let modo; //El modo 0 es PvP
 const botonesNiveles = document.getElementsByClassName('niveles');
 const botonesFicha = document.getElementsByClassName('ficha');
 const settings = document.getElementsByClassName('settings');
 const casillas = document.getElementsByClassName('cell');
+let partidaEnMarcha = false;
 
 
 // Función que cambia el contenido según la clave del JSON
@@ -142,7 +142,7 @@ function cargarHTML(pagina) {
       } else {
         if (!check1 && campoVacio(botonesNiveles[0])) {
           nivelSinElegir.textContent = 'Debes elegir un nivel para continuar'
-          nivelSinElegir.style.color = 'red';
+          nivelSinElegir.style.color = '#FF817A';
           nivelSinElegir.id = 'imHere'
           nivelSinElegir.classList.add('inicio')
           document.querySelector('#nivelesBtns').after(nivelSinElegir)
@@ -151,7 +151,7 @@ function cargarHTML(pagina) {
         }
         if (!check2 && campoVacio(botonesFicha[0])) {
           fichaSinElegir.textContent = 'Debes elegir una ficha para continuar'
-          fichaSinElegir.style.color = 'red';
+          fichaSinElegir.style.color = '#FF817A';
           fichaSinElegir.id = 'imHere'
           fichaSinElegir.classList.add('inicio')
           document.querySelector('#fichasBtns').after(fichaSinElegir)
@@ -174,8 +174,17 @@ function cargarHTML(pagina) {
     document.querySelector('#iniciobtn').onclick = () => { cargarHTML('pagina1'); modo = 0; };
     if (modo) {
       reiniciar();
-      document.querySelector('#difficulty').textContent = difficultyTextJuego + nivelElegido.textContent;
-      document.querySelector('#player-choice').textContent = playerChoiceTextJuego + fichaElegida.textContent;
+      //Inserto estos dos párrafos que no serán los mismos en el modo PvP
+      const difficulty = document.createElement('p');
+      difficulty.id = 'difficulty';
+      difficulty.textContent = difficultyTextJuego + nivelElegido.textContent;
+      document.querySelector('h1').insertAdjacentElement('afterend', difficulty);
+
+      const playerChoice = document.createElement('p');
+      playerChoice.id = 'player-choice';
+      playerChoice.textContent = playerChoiceTextJuego + fichaElegida.textContent;
+      difficulty.insertAdjacentElement('afterend', playerChoice);
+
       player = fichaElegida.textContent;
       playerMaquina = player === 'X' ? 'O' : 'X';
       if (nivelElegido.textContent === "Fácil") {
@@ -188,11 +197,39 @@ function cargarHTML(pagina) {
         imposible();
       }
     } else {
-      document.querySelector('#difficulty').textContent = "Player 1 = X";
-      document.querySelector('#player-choice').textContent = "Player 2 = 0";
       document.querySelector('#ajustesbtn').remove();
       document.querySelector('#enlaces').style.gridTemplateColumns = '130px 130px';
       document.querySelector('#reiniciarbtn').style.justifySelf = 'end';
+
+      turnoPlayerText = document.createElement('p');
+      turnoPlayerText.id = 'turno-player-text';
+      turnoPlayerText.textContent = 'Turno de: ' + (turnoPlayer === 0 ? 'Player 1' : 'Player 2');
+
+      const divTurnoPlayer = document.createElement('div');
+
+      const players = document.createElement('div');
+      players.id = 'players'
+      for (let elem of settings) {
+        elem.appendChild(players);
+        elem.appendChild(divTurnoPlayer);
+      }
+
+      divTurnoPlayer.appendChild(turnoPlayerText);
+
+      const player1Choice = document.createElement('p');
+      player1Choice.id = 'player1-choice';
+      player1Choice.textContent = 'Player 1: X';
+      players.appendChild(player1Choice);
+
+      const player2Choice = document.createElement('p');
+      player2Choice.id = 'player2-choice';
+      player2Choice.textContent = 'Player 2: O';
+      players.appendChild(player2Choice);
+
+
+
+
+
       PvP();
     }
   } else {
@@ -248,11 +285,13 @@ function reiniciar() {
     }
   } else {
     turnoPlayer = 0;
+    turnoPlayerText.textContent = 'Turno de: Player 1';
+    turnoPlayerText.style.color = '#6EBB6E';
     PvP();
   }
 }
 
-function showWinLine(cells, color = 'red') {
+function showWinLine(cells, color = '#FF817A') {
   const board = document.querySelector('.board');
   const cellElements = document.querySelectorAll('.cell');
 
@@ -302,12 +341,12 @@ function showWinLine(cells, color = 'red') {
       line.style.transformOrigin = '0 0';
       if (cells.includes(0) && cells.includes(4) && cells.includes(8)) {
         // Top-left to bottom-right
-        const scaleFactor = 0.99; // Factor para reducir la longitud de la línea a la mitad
+        const scaleFactor = 0.99; // Factor para #FF817Aucir la longitud de la línea a la mitad
         line.style.width = `${Math.sqrt(Math.pow(boardRect.width, 2) + Math.pow(boardRect.height, 2)) * scaleFactor}px`;
         line.style.transform = 'rotate(45deg) translate(-5px, -5px)';
       } else if (cells.includes(2) && cells.includes(4) && cells.includes(6)) {
         // Top-right to bottom-left
-        const scaleFactor = 0.98; // Factor para reducir la longitud de la línea a la mitad
+        const scaleFactor = 0.98; // Factor para #FF817Aucir la longitud de la línea a la mitad
         line.style.width = `${Math.sqrt(Math.pow(boardRect.width, 2) + Math.pow(boardRect.height, 2)) * scaleFactor}px`;
         line.style.transform = `rotate(-45deg) translate(-${boardRect.width * 0.69}px, ${boardRect.height * 0.69}px)`; // Move left one and a half cells, down one and a half cells
       }
@@ -371,7 +410,7 @@ function imposible() {
     casilla.onclick = (e) => {
       // casilla.style.fontSize = '40px'
       casilla.textContent = player;
-      casilla.style.color = 'green'
+      casilla.style.color = '#8DDA8D'
       casillasMarcadas++;
       e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
       if (saberSiGanaJugador()) {
@@ -527,7 +566,7 @@ function imposible() {
 function responder(num) {
   if (casillas[num].textContent === '') {
     casillas[num].onclick = null;
-    casillas[num].style.color = 'red'
+    casillas[num].style.color = '#FF817A'
     if (player === 'X') {
       casillas[num].textContent = 'O';
     }
@@ -660,7 +699,7 @@ function ganaMaquina(casillasGanadoras) {
   for (let casilla of casillas) {
     casilla.onclick = null;
   }
-  showWinLine(casillasGanadoras, 'red')
+  showWinLine(casillasGanadoras, '#FF817A')
   checkGameStatus('derrota');
   document.querySelector('.modal').style.backgroundColor = 'rgba(128,0,0,0.4)'
 }
@@ -1046,7 +1085,7 @@ function ganaJugador(casillasGanadoras) {
   for (let casilla of casillas) {
     casilla.onclick = null;
   }
-  showWinLine(casillasGanadoras, 'green');
+  showWinLine(casillasGanadoras, '#8DDA8D');
   checkGameStatus('victoria');
   document.querySelector('.modal').style.backgroundColor = 'rgba(0,128,0,0.4)'
 }
@@ -1128,7 +1167,7 @@ function facil() {
   for (const casilla of casillas) {
     casilla.onclick = (e) => {
       casilla.textContent = player;
-      casilla.style.color = 'green'
+      casilla.style.color = '#8DDA8D'
       casillasMarcadas++;
       e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
       //SABER SI GANA EL JUGADOR
@@ -1145,7 +1184,7 @@ function medio() {
   for (const casilla of casillas) {
     casilla.onclick = (e) => {
       casilla.textContent = player;
-      casilla.style.color = 'green'
+      casilla.style.color = '#8DDA8D'
       casillasMarcadas++;
       e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
       //SABER SI GANA EL JUGADOR
@@ -1163,7 +1202,7 @@ function dificil() {
   for (const casilla of casillas) {
     casilla.onclick = (e) => {
       casilla.textContent = player;
-      casilla.style.color = 'green'
+      casilla.style.color = '#8DDA8D'
       casillasMarcadas++;
       e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
       //SABER SI GANA EL JUGADOR
@@ -1406,30 +1445,39 @@ function ganaPlayer(casillasGanadoras) {
   }
   showWinLine(casillasGanadoras, color)
   checkGameStatus(player);
-  let bgColorModal = color === 'red' ? 'rgba(128,0,0,0.4)' : 'rgba(0,128,0,0.4)';
+  let bgColorModal = color === '#FF817A' ? 'rgba(128,0,0,0.4)' : 'rgba(0,128,0,0.4)';
   document.querySelector('.modal').style.backgroundColor = bgColorModal;
 
 }
 
 function PvP() {
+  partidaEnMarcha = true;
   casillasMarcadas = 0;
+  turnoPlayer = 0;
+  turnoPlayerText.textContent = 'Turno de: Player 1';
+  turnoPlayerText.style.color = (turnoPlayer === 0 ? '#6EBB6E' : '#D86E6D');
   for (const casilla of casillas) {
     casilla.onclick = (e) => {
       player = turnoPlayer === 0 ? 'X' : 'O';
       casilla.textContent = player;
-      color = turnoPlayer === 0 ? 'green' : 'red'
+      color = turnoPlayer === 0 ? '#8DDA8D' : '#FF817A'
       casilla.style.color = color;
       e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
       casillasMarcadas++;
       //SABER SI GANA EL JUGADOR
-      if (checkWinner()) { }
-      //RESPONDER DE FORMA ALEATORIA EN UNA CASILLA LIBRE
+      if (checkWinner()) {partidaEnMarcha = false;}
+      //SABER SI ES EMPATE
       else if (saberSiEsEmpate()) {
         checkGameStatus('empate');
         document.querySelector('.modal').style.backgroundColor = 'rgba(0,0,0,0.4)'
-        casilla.onclick = none;
+        casilla.onclick = null;
+        partidaEnMarcha = false;
       }
-      turnoPlayer = turnoPlayer === 0 ? 1 : 0;
+      if (partidaEnMarcha) {
+        turnoPlayer = turnoPlayer === 0 ? 1 : 0;
+        turnoPlayerText.textContent = 'Turno de: ' + (turnoPlayer === 0 ? 'Player 1' : 'Player 2');
+        turnoPlayerText.style.color = (turnoPlayer === 0 ? '#6EBB6E' : '#D86E6D');
+      }
     }
   }
 }
