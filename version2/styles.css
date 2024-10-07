@@ -310,6 +310,10 @@ button:not(#volverArrow):disabled:after {
     font-size: 2.5em;
   }
 
+  .cell:hover {
+    background-color: #fff;
+  }
+
 }
 
 @media (max-height: 450px) {
