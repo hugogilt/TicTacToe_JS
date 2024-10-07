@@ -25,7 +25,7 @@ const paginas = {
             </div>
             <button id= "jugarbtn" class="inicio">Jugar</button>
           </div>
-          <button id= "volverArrow"><img src="../img/left_arrow.png" alt=""></button>
+          <button id= "volverArrow"><img src="../img/left_arrow.png" alt="Volver atrás"></button>
     </div>
             `,
   "pagina3": `
