@@ -53,7 +53,7 @@ h1 {
   font-weight: bold;
 }
 
-#players {
+.settingsDisplay {
   background-color: #fff;
   border-radius: 8px;
   display: inline-block;
@@ -72,7 +72,15 @@ h1 {
   font-weight: bold;
 }
 
+#difficulty {
+  color: #D86E6D;
+  font-weight: bold;
+}
 
+#player-choice {
+  color: #6EBB6E;
+  font-weight: bold;
+}
 
 
 
@@ -225,7 +233,6 @@ button:not(#volverArrow)::after {
   width: 0;
   background: #9BD8D6;
   transition: width .5s;
-
 }
 
 
@@ -285,43 +292,6 @@ button:not(#volverArrow):disabled:after {
   top: -7px;
 }
 
-@media (max-width: 600px) {
-  .modal-content {
-    margin: 15% auto;
-  }
-
-  .board {
-    width: 70vw;
-    /* Ajustar a un 90% del ancho de la pantalla */
-    height: 70vw;
-    /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
-    max-height: 70vh;
-    /* Limitar la altura a un 90% de la altura de la pantalla */
-    max-width: 70vh;
-    /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
-    margin: 0 auto;
-  }
-
-  button:not(#enlaces button) {
-    font-size: 1em;
-  }
-
-  h1 {
-    font-size: 2.5em;
-  }
-
-  .cell:hover {
-    background-color: #fff;
-  }
-
-}
-
-@media (max-height: 450px) {
-  body {
-    overflow: auto;
-  }
-}
-
 /* Estilos para el modal */
 .modal {
   display: none;
@@ -360,4 +330,120 @@ button:not(#volverArrow):disabled:after {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+footer {
+  background-color: #002B89;
+  color: white;
+  font-weight: bold;
+  padding: 1em 2em;
+  border-radius: 12px 12px 0px 0px;
+  width: 600px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#author {
+  font-size: 10px;
+  float:right;
+  margin-right: 2em;
+}
+
+#link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#divDonacion {
+  position: fixed; /* Fija el div en la pantalla */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición al centro */
+  width: 400px; /* Ancho del div */
+  height: 650px; /* Alto del div */
+  background-color: #002B89; /* Color de fondo */
+  display: grid;
+  grid-template-rows: 150px 350px 150px; /* Crea 3 filas iguales */
+  gap: 10px; /* Espacio entre las filas */
+  text-align: center;
+  color: white; /* Color del texto */
+  border-radius: 8px; /* Bordes redondeados */
+  z-index: 1000; /* Asegura que el div esté por encima de otros elementos */
+  opacity: 0; /* Comienza invisible */
+  transition: opacity 0.5s; /* Transición para la opacidad */
+}
+
+#divDonacion.show {
+  opacity: 1; /* Hace que el div sea visible */
+}
+
+#divDonacion a{
+  align-self: center;
+}
+
+#payPal {
+  width: 50%;
+  margin: 0 auto;
+align-self: center;
+  width: 30%; /* Asegura que las imágenes ocupen el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de las imágenes */
+}
+#qr {
+  margin: 0 auto;
+  width: 70%;
+  border: solid white 4px;
+  margin-bottom: 10%;
+  align-self: center;
+ 
+
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    margin: 15% auto;
+  }
+
+  .board {
+    width: 70vw;
+    /* Ajustar a un 90% del ancho de la pantalla */
+    height: 70vw;
+    /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+    max-height: 70vh;
+    /* Limitar la altura a un 90% de la altura de la pantalla */
+    max-width: 70vh;
+    /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+    margin: 0 auto;
+  }
+
+  button:not(#enlaces button) {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  .cell:hover {
+    background-color: #fff;
+  }
+
+  button:not(#volverArrow):hover::after,
+  button:not(#volverArrow):hover::before {
+    width: 0;
+  }
+
+  body {
+    background-position: center;
+  }
+
+  footer {
+    width: 100%;
+    border-radius: 0px;
+  }
+}
+
+@media (max-height: 450px) {
+  body {
+    overflow: auto;
+  }
 }

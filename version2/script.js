@@ -8,6 +8,9 @@ const paginas = {
           <button onclick = "cargarHTML('pagina2')">1 vs CPU</button>
        </div>
      </div>
+     <footer>
+      <p>  Si quieres apoyarme, <span id="link">haz click aquí.</span></p><span id="author">Hecho por: Hugo Gil Tejero</span>
+    </footer>
             `,
   "pagina2": `
         <div class="container">
@@ -27,11 +30,15 @@ const paginas = {
           </div>
           <button id= "volverArrow"><img src="../img/left_arrow.png" alt="Volver atrás"></button>
     </div>
+    <footer>
+      <p>  Si quieres apoyarme, <span id="link">haz click aquí.</span></p><span id="author">Hecho por: Hugo Gil Tejero</span>
+    </footer>
             `,
   "pagina3": `
     <div class="container">
         <div class="settings">
             <h1 class="juego">Tic Tac Toe</h1>
+            <div class= "settingsDisplay"></div>
         </div>
         <div class="board juego">
             <div class="cell juego" data-index="0"></div>
@@ -57,6 +64,9 @@ const paginas = {
             </div>
         </div>
     </div>
+    <footer>
+      <p>  Si quieres apoyarme, <span id="link">haz click aquí.</span></p><span id="author">Hecho por: Hugo Gil Tejero</span>
+    </footer>
             `
 };
 
@@ -104,6 +114,7 @@ function cargarHTML(pagina) {
           boton.disabled = false;
         }
         e.currentTarget.disabled = true;
+        nivelSinElegir.remove();
       }
     }
 
@@ -113,6 +124,7 @@ function cargarHTML(pagina) {
           boton.disabled = false;
         }
         e.currentTarget.disabled = true;
+        fichaSinElegir.remove();
       }
     }
     const jugarbtn = document.querySelector('#jugarbtn');
@@ -174,16 +186,22 @@ function cargarHTML(pagina) {
     document.querySelector('#iniciobtn').onclick = () => { cargarHTML('pagina1'); modo = 0; };
     if (modo) {
       reiniciar();
+
+      const divCPU = document.querySelector('.settingsDisplay');
+
       //Inserto estos dos párrafos que no serán los mismos en el modo PvP
       const difficulty = document.createElement('p');
       difficulty.id = 'difficulty';
       difficulty.textContent = difficultyTextJuego + nivelElegido.textContent;
-      document.querySelector('h1').insertAdjacentElement('afterend', difficulty);
+      divCPU.appendChild(difficulty);
 
       const playerChoice = document.createElement('p');
       playerChoice.id = 'player-choice';
       playerChoice.textContent = playerChoiceTextJuego + fichaElegida.textContent;
       difficulty.insertAdjacentElement('afterend', playerChoice);
+
+
+      
 
       player = fichaElegida.textContent;
       playerMaquina = player === 'X' ? 'O' : 'X';
@@ -207,10 +225,8 @@ function cargarHTML(pagina) {
 
       const divTurnoPlayer = document.createElement('div');
 
-      const players = document.createElement('div');
-      players.id = 'players'
+      const players = document.querySelector('.settingsDisplay');
       for (let elem of settings) {
-        elem.appendChild(players);
         elem.appendChild(divTurnoPlayer);
       }
 
@@ -1481,6 +1497,11 @@ function PvP() {
     }
   }
 }
+
+//Donaciones
+
+
+
 
 
 
