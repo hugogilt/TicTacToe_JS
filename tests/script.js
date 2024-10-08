@@ -9,7 +9,7 @@ const paginas = {
        </div>
      </div>
      <footer>
-      <p>  Si quieres apoyarme, <span id="link">haz click aquí.</span></p><span id="author">Hecho por: Hugo Gil Tejero</span>
+      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
     </footer>
             `,
   "pagina2": `
@@ -31,7 +31,7 @@ const paginas = {
           <button id= "volverArrow"><img src="../img/left_arrow.png" alt="Volver atrás"></button>
     </div>
     <footer>
-      <p>  Si quieres apoyarme, <span id="link">haz click aquí.</span></p><span id="author">Hecho por: Hugo Gil Tejero</span>
+      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
     </footer>
             `,
   "pagina3": `
@@ -65,7 +65,7 @@ const paginas = {
         </div>
     </div>
     <footer>
-      <p>  Si quieres apoyarme, <span id="link">haz click aquí.</span></p><span id="author">Hecho por: Hugo Gil Tejero</span>
+      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
     </footer>
             `
 };
@@ -91,8 +91,8 @@ const botonesNiveles = document.getElementsByClassName('niveles');
 const botonesFicha = document.getElementsByClassName('ficha');
 const settings = document.getElementsByClassName('settings');
 const casillas = document.getElementsByClassName('cell');
+const footers = document.getElementsByClassName('link');
 let partidaEnMarcha = false;
-
 
 // Función que cambia el contenido según la clave del JSON
 function cargarHTML(pagina) {
@@ -101,8 +101,8 @@ function cargarHTML(pagina) {
     document.body.innerHTML = paginas[pagina];
     //-------------------------------------PAGINA 2-------------------------------------
   } else if (paginas[pagina] && pagina === "pagina2") {
-    document.body.innerHTML = paginas[pagina]
-    resetearBotones();;
+    document.body.innerHTML = paginas[pagina];
+    resetearBotones();
     document.querySelector('#volverArrow').onclick = () => { cargarHTML('pagina1'); modo = 0; };
     const fichaSinElegir = document.createElement('p');
     const nivelSinElegir = document.createElement('p');
@@ -128,7 +128,7 @@ function cargarHTML(pagina) {
       }
     }
     const jugarbtn = document.querySelector('#jugarbtn');
-    document.querySelector('#jugarbtn').onclick = () => {
+    jugarbtn.onclick = () => {
       let check1 = false;
       let check2 = false;
       for (let boton of botonesNiveles) {
@@ -175,8 +175,6 @@ function cargarHTML(pagina) {
     //-------------------------------------PAGINA 3-------------------------------------
   } else if ((paginas[pagina] && pagina === "pagina3")) {
     document.body.innerHTML = paginas[pagina];
-
-
     for (let setting of settings) {
       setting.style.gridRow = "1";
       setting.style.alignSelf = "center";
@@ -201,7 +199,7 @@ function cargarHTML(pagina) {
       difficulty.insertAdjacentElement('afterend', playerChoice);
 
 
-      
+
 
       player = fichaElegida.textContent;
       playerMaquina = player === 'X' ? 'O' : 'X';
@@ -251,7 +249,7 @@ function cargarHTML(pagina) {
   } else {
     console.error('Página no encontrada');
   }
-
+  clickDonacion();
 }
 
 function campoVacio(lugar) {
@@ -1481,7 +1479,7 @@ function PvP() {
       e.currentTarget.onclick = null; //CUANDO MARCA UNA CASILLA, NO PUEDE VOLVER A MARCARLA
       casillasMarcadas++;
       //SABER SI GANA EL JUGADOR
-      if (checkWinner()) {partidaEnMarcha = false;}
+      if (checkWinner()) { partidaEnMarcha = false; }
       //SABER SI ES EMPATE
       else if (saberSiEsEmpate()) {
         checkGameStatus('empate');
@@ -1499,43 +1497,46 @@ function PvP() {
 }
 
 //Donaciones
-document.getElementById('link').addEventListener('click', function(event) {
-  // Prevenir el clic en el span para que no cierre el div inmediatamente
-  event.stopPropagation(); 
+function clickDonacion() {
+  let footer = footers[0];
+  footer.addEventListener('click', function (event) {
+    // Prevenir el clic en el span para que no cierre el div inmediatamente
+    console.log('pepe');
+    event.stopPropagation();
 
-  // Crear el div
-  const divDonacion = document.createElement('div');
-  divDonacion.id = 'divDonacion';
+    // Crear el div
+    const divDonacion = document.createElement('div');
+    divDonacion.id = 'divDonacion';
 
-  // Añadir el contenido del divDonacion (puedes poner un código QR aquí)
-  divDonacion.innerHTML = '<a target= "_blank" href= "https://www.paypal.me/hugogilt"><img id= "payPal" src="../img/payPal.png" alt="https://www.paypal.me/hugogilt" id="paypal"></a><a target= "_blank" href= "https://www.paypal.me/hugogilt"><img id= "qr" src="../img/qrPayPal.png" alt="https://www.paypal.me/hugogilt" id="qr"></a><p id="thanks">Gracias por su colaboración.</p>'; // Reemplaza esto con tu código QR
+    // Añadir el contenido del divDonacion (puedes poner un código QR aquí)
+    divDonacion.innerHTML = '<a target= "_blank" href= "https://www.paypal.me/hugogilt"><img id= "payPal" src="../img/payPal.png" alt="https://www.paypal.me/hugogilt" id="paypal"></a><a target= "_blank" href= "https://www.paypal.me/hugogilt"><img id= "qr" src="../img/qrPayPal.png" alt="https://www.paypal.me/hugogilt" id="qr"></a><p id="thanks">Gracias por su colaboración.</p>'; // Reemplaza esto con tu código QR
 
-  // Añadir el divDonacion al body
-  document.body.appendChild(divDonacion);
+    // Añadir el divDonacion al body
+    document.body.appendChild(divDonacion);
 
-  // Agregar la clase 'show' para activar la transición
-  setTimeout(() => {
+    // Agregar la clase 'show' para activar la transición
+    setTimeout(() => {
       divDonacion.classList.add('show');
-  }, 0);
+    }, 0);
 
-  // Cerrar el divDonacion al hacer clic en cualquier parte de la pantalla
-  const closeDivDonacion = (event) => {
+    // Cerrar el divDonacion al hacer clic en cualquier parte de la pantalla
+    const closeDivDonacion = (event) => {
       // Si el clic fue fuera del divDonacion, cierra el divDonacion
       if (!divDonacion.contains(event.target)) {
-          divDonacion.classList.remove('show'); // Elimina la clase para iniciar la transición de cierre
-          setTimeout(() => {
-              divDonacion.remove(); // Elimina el div del DOM después de la transición
-          }, 500); // Espera 0.5s antes de eliminar
-          // Elimina el evento de clic para no seguir escuchando
-          document.removeEventListener('click', closeDivDonacion);
+        divDonacion.classList.remove('show'); // Elimina la clase para iniciar la transición de cierre
+        setTimeout(() => {
+          divDonacion.remove(); // Elimina el div del DOM después de la transición
+        }, 500); // Espera 0.5s antes de eliminar
+        // Elimina el evento de clic para no seguir escuchando
+        document.removeEventListener('click', closeDivDonacion);
       }
-  };
+    };
 
-  // Añadir el evento de clic al document
-  document.addEventListener('click', closeDivDonacion);
-});
-
-
+    // Añadir el evento de clic al document
+    document.addEventListener('click', closeDivDonacion);
+  });
+}
+clickDonacion();
 
 
 

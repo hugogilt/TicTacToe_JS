@@ -16,7 +16,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 90%;
+  height: 93vh;
   /* El contenedor ocupa el 100% del alto de la ventana */
   gap: 0;
 
@@ -340,16 +340,14 @@ footer {
   width: 600px;
   text-align: center;
   box-sizing: border-box;
-  height: 10%;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 7%;
 }
 
-#author {
-  font-size: 10px;
-  float:right;
-  margin-right: 2em;
-}
 
-#link {
+.link {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -438,11 +436,6 @@ align-self: center;
   footer {
     width: 100%;
     border-radius: 0px;
-      position: fixed;
-
-      bottom: 0; /* Asegura que esté siempre al fondo */
-      z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
-  
   }
 
   #divDonacion {
@@ -472,4 +465,21 @@ align-self: center;
   h1 {
     font-size: 2em;
   }
+
+  .board {
+    width: 40vh;
+    /* Ajustar a un 90% del ancho de la pantalla */
+    height: 40vh;
+    /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+    max-height: 40vw;
+    /* Limitar la altura a un 90% de la altura de la pantalla */
+    max-width: 40vw;
+    /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+    margin: auto;
+  }
+
+  footer{
+    padding: 0.5% 2em;
+  }
+
 }
