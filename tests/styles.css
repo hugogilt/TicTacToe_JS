@@ -341,6 +341,7 @@ footer {
   text-align: center;
   box-sizing: border-box;
   position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
