@@ -93,6 +93,8 @@ const settings = document.getElementsByClassName('settings');
 const casillas = document.getElementsByClassName('cell');
 const footers = document.getElementsByClassName('link');
 let partidaEnMarcha = false;
+let player1Choice;
+let player2Choice;
 
 // Función que cambia el contenido según la clave del JSON
 function cargarHTML(pagina) {
@@ -175,6 +177,9 @@ function cargarHTML(pagina) {
     //-------------------------------------PAGINA 3-------------------------------------
   } else if ((paginas[pagina] && pagina === "pagina3")) {
     document.body.innerHTML = paginas[pagina];
+    if (!(height < 800 && width > height)) {
+      vertical = true;
+    }
     for (let setting of settings) {
       setting.style.gridRow = "1";
       setting.style.alignSelf = "center";
@@ -230,22 +235,22 @@ function cargarHTML(pagina) {
 
       divTurnoPlayer.appendChild(turnoPlayerText);
 
-      const player1Choice = document.createElement('p');
+      player1Choice = document.createElement('p');
       player1Choice.id = 'player1-choice';
       player1Choice.textContent = 'Player 1: X';
       players.appendChild(player1Choice);
 
-      const player2Choice = document.createElement('p');
+      player2Choice = document.createElement('p');
       player2Choice.id = 'player2-choice';
       player2Choice.textContent = 'Player 2: O';
       players.appendChild(player2Choice);
 
-
-
-
-
       PvP();
     }
+    // Comprueba el tamaño de la pantalla al cargar la página 3
+    editByWindowScale();
+    // Comprueba el tamaño de la pantalla al redimensionar la ventana
+    window.onresize = editByWindowScale;
   } else {
     console.error('Página no encontrada');
   }
@@ -1537,6 +1542,84 @@ function clickDonacion() {
   });
 }
 clickDonacion();
+
+// let vertical = false;
+// const width = window.innerWidth;
+// const height = window.innerHeight;
+
+// function editByWindowScale() {
+//   const divRotate = document.createElement('div');
+//   const board = document.querySelector('.board');
+//   const players = document.querySelector('.settingsDisplay')
+//   debugger;
+//   if (height < 800 && width > height) {
+//       console.log('horizontal')
+//     settings[0].style.alignSelf = "start";
+//     divRotate.id = 'divRotate';
+//     settings[0].after(divRotate);
+//     divRotate.appendChild(board);
+//     divRotate.prepend(players);
+//     divRotate.appendChild(players.cloneNode(false));
+//     board.nextElementSibling.appendChild(player2Choice);
+    
+//   } else {
+//     console.log('vertical')
+//     if (divRotate) {
+//       board.nextElementSibling.remove()
+//     }
+//     players.appendChild(player1Choice);
+//     players.appendChild(player2Choice);
+//     settings[0].firstChild.nextSibling.after(players);
+//     divRotate.remove();
+//   }
+// }
+
+
+
+let vertical = false;
+let horizontal = false;
+let horizontaleado = false;
+let verticaleado = false;
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+function editByWindowScale() {
+   width = window.innerWidth;
+ height = window.innerHeight;
+  const divRotate = document.createElement('div');
+  const board = document.querySelector('.board');
+  const players = document.querySelector('.settingsDisplay')
+  if (!(height < 800 && width > height)) {
+    vertical = true;
+  } else {
+    horizontal = true;
+  }
+  if (horizontal && !horizontaleado) {
+      console.log('horizontal')
+    settings[0].style.alignSelf = "start";
+    divRotate.id = 'divRotate';
+    settings[0].after(divRotate);
+    divRotate.appendChild(board);
+    divRotate.prepend(players);
+    divRotate.appendChild(players.cloneNode(false));
+    board.nextElementSibling.appendChild(player2Choice);
+    horizontaleado = true;
+    verticaleado = false;
+    vertical = false;
+  } else if(vertical && !verticaleado){
+    console.log('vertical')
+    if (divRotate) {
+      board.nextElementSibling.remove()
+    }
+    players.appendChild(player1Choice);
+    players.appendChild(player2Choice);
+    settings[0].firstChild.nextSibling.after(players);
+    divRotate.remove();
+    verticaleado = true;
+    horizontaleado = false;
+    horizontal = false;
+  }
+}
 
 
 

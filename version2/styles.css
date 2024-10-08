@@ -16,7 +16,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 93vh;
+  height: 100vh;
   /* El contenedor ocupa el 100% del alto de la ventana */
   gap: 0;
 
@@ -397,7 +397,14 @@ align-self: center;
 
 }
 
-
+#divRotate {
+  grid-row: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
 
 
 
@@ -421,7 +428,7 @@ align-self: center;
   
 
   footer{
-    padding: 0.5% 2em;
+    padding: 3% 2em;
   }
 
   .board {
@@ -446,9 +453,29 @@ align-self: center;
 
 @media (max-height: 450px) {
   body {
-    overflow: auto;
+    overflow: hidden;
   }
 }
+
+
+
+@media (max-height: 500px) {
+  @media (min-width: 500px) {
+      h1{
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        /* width: 100vw;  TOFIX: cuando hago esto se pone scroll */
+      }
+      #turno-player-text {
+        margin: 0 0 0.5rem;
+      }
+
+
+      
+  }
+}
+
+
 
 @media (max-width: 600px) {
   .modal-content {
@@ -499,3 +526,4 @@ align-self: center;
     grid-template-rows: 104px 242px 104px; /* Crea 3 filas iguales */
   }
 }
+
