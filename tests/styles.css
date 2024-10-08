@@ -340,6 +340,7 @@ footer {
   width: 600px;
   text-align: center;
   box-sizing: border-box;
+  position: fixed;
   display: flex;
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
