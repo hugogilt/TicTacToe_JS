@@ -95,12 +95,16 @@ const footers = document.getElementsByClassName('link');
 let partidaEnMarcha = false;
 let player1Choice;
 let player2Choice;
+const playerChoice = document.createElement('p');
+const difficulty = document.createElement('p');
 
 // Función que cambia el contenido según la clave del JSON
 function cargarHTML(pagina) {
   //-------------------------------------PAGINA 1-------------------------------------
   if (paginas[pagina] && pagina === "pagina1") {
     document.body.innerHTML = paginas[pagina];
+    horizontaleado = false;
+    verticaleado = true;
     //-------------------------------------PAGINA 2-------------------------------------
   } else if (paginas[pagina] && pagina === "pagina2") {
     document.body.innerHTML = paginas[pagina];
@@ -193,12 +197,10 @@ function cargarHTML(pagina) {
       const divCPU = document.querySelector('.settingsDisplay');
 
       //Inserto estos dos párrafos que no serán los mismos en el modo PvP
-      const difficulty = document.createElement('p');
       difficulty.id = 'difficulty';
       difficulty.textContent = difficultyTextJuego + nivelElegido.textContent;
       divCPU.appendChild(difficulty);
 
-      const playerChoice = document.createElement('p');
       playerChoice.id = 'player-choice';
       playerChoice.textContent = playerChoiceTextJuego + fichaElegida.textContent;
       difficulty.insertAdjacentElement('afterend', playerChoice);
@@ -1543,37 +1545,6 @@ function clickDonacion() {
 }
 clickDonacion();
 
-// let vertical = false;
-// const width = window.innerWidth;
-// const height = window.innerHeight;
-
-// function editByWindowScale() {
-//   const divRotate = document.createElement('div');
-//   const board = document.querySelector('.board');
-//   const players = document.querySelector('.settingsDisplay')
-//   debugger;
-//   if (height < 800 && width > height) {
-//       console.log('horizontal')
-//     settings[0].style.alignSelf = "start";
-//     divRotate.id = 'divRotate';
-//     settings[0].after(divRotate);
-//     divRotate.appendChild(board);
-//     divRotate.prepend(players);
-//     divRotate.appendChild(players.cloneNode(false));
-//     board.nextElementSibling.appendChild(player2Choice);
-    
-//   } else {
-//     console.log('vertical')
-//     if (divRotate) {
-//       board.nextElementSibling.remove()
-//     }
-//     players.appendChild(player1Choice);
-//     players.appendChild(player2Choice);
-//     settings[0].firstChild.nextSibling.after(players);
-//     divRotate.remove();
-//   }
-// }
-
 
 
 let vertical = false;
@@ -1584,36 +1555,57 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 
 function editByWindowScale() {
-   width = window.innerWidth;
- height = window.innerHeight;
+  width = window.innerWidth;
+  height = window.innerHeight;
   const divRotate = document.createElement('div');
+  divRotate.id = 'divRotate';
   const board = document.querySelector('.board');
   const players = document.querySelector('.settingsDisplay')
+  const divCPU = document.querySelector('.settingsDisplay');
   if (!(height < 800 && width > height)) {
     vertical = true;
   } else {
     horizontal = true;
   }
   if (horizontal && !horizontaleado) {
-      console.log('horizontal')
+    console.log('horizontal');
     settings[0].style.alignSelf = "start";
-    divRotate.id = 'divRotate';
     settings[0].after(divRotate);
     divRotate.appendChild(board);
-    divRotate.prepend(players);
-    divRotate.appendChild(players.cloneNode(false));
-    board.nextElementSibling.appendChild(player2Choice);
+    if (modo) {
+      divRotate.style.gap = '1em';
+      divCPU.style.width = '15%';
+      divRotate.prepend(divCPU);
+      divRotate.appendChild(divCPU.cloneNode(false));
+      board.nextElementSibling.appendChild(difficulty);
+      difficulty.textContent = 'Nivel CPU: ' + nivelElegido.textContent;
+    } else {
+      divRotate.prepend(players);
+      divRotate.appendChild(players.cloneNode(false));
+      board.nextElementSibling.appendChild(player2Choice);
+      divCPU.style.removeProperty('width');
+      divCPU.style.removeProperty('gap');
+    }
     horizontaleado = true;
     verticaleado = false;
     vertical = false;
-  } else if(vertical && !verticaleado){
-    console.log('vertical')
-    if (divRotate) {
+  } else if (vertical && !verticaleado) {
+    console.log('vertical');
+    divCPU.style.removeProperty('width')
+    if (document.querySelector('#divRotate')) {
       board.nextElementSibling.remove()
     }
-    players.appendChild(player1Choice);
-    players.appendChild(player2Choice);
-    settings[0].firstChild.nextSibling.after(players);
+    if (modo) {
+      divCPU.appendChild(playerChoice);
+      divCPU.appendChild(difficulty);
+      difficulty.textContent = difficultyTextJuego + nivelElegido.textContent;
+      settings[0].firstChild.nextSibling.after(divCPU);
+    } else {
+
+      players.appendChild(player1Choice);
+      players.appendChild(player2Choice);
+      settings[0].firstChild.nextSibling.after(players);
+    }
     divRotate.remove();
     verticaleado = true;
     horizontaleado = false;
