@@ -3,7 +3,7 @@ const paginas = {
   "pagina1": `
     <div class="container">
        <div id="start">
-         <h1>Tic Tac Toe</h1>
+         <h1 lang="en">Tic Tac Toe</h1>
           <button onclick = "cargarHTML('pagina3')">1 vs 1</button>
           <button onclick = "cargarHTML('pagina2')">1 vs CPU</button>
        </div>
@@ -14,8 +14,8 @@ const paginas = {
             `,
   "pagina2": `
         <div class="container">
-        <div class="settings">
-        <h1 class="juego">Tic Tac Toe</h1>
+        <div lang="es" class="settings">
+        <h1 lang="en" class="juego">Tic Tac Toe</h1>
             <div id="nivelesBtns" class="inicio">
                 <button class="niveles inicio">Fácil</button>
                 <button class="niveles inicio">Medio</button>
@@ -31,13 +31,13 @@ const paginas = {
           <button id= "volverArrow"><img src="../img/left_arrow.png" alt="Volver atrás"></button>
     </div>
     <footer>
-      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
+      <span lang="es">  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
     </footer>
             `,
   "pagina3": `
     <div class="container">
-        <div class="settings">
-            <h1 class="juego">Tic Tac Toe</h1>
+        <div lang="es" class="settings">
+            <h1 lang="en" class="juego">Tic Tac Toe</h1>
             <div class= "settingsDisplay"></div>
         </div>
         <div class="board juego">
@@ -51,7 +51,7 @@ const paginas = {
             <div class="cell juego" data-index="7"></div>
             <div class="cell juego" data-index="8"></div>
         </div>
-        <div id="enlaces">
+        <div lang="es" id="enlaces">
             <button id="ajustesbtn" class="juego">Ajustes</button>
             <button id="reiniciarbtn" class="juego"> Reiniciar </button>
             <button id="iniciobtn" class="juego">Inicio</button>
@@ -255,6 +255,11 @@ function cargarHTML(pagina) {
     editByWindowScale();
     // Comprueba el tamaño de la pantalla al redimensionar la ventana
     window.onresize = editByWindowScale;
+    // Llama a la función al inicio
+adjustLayout();
+
+// Vuelve a ajustar al cambiar el tamaño de la ventana
+window.addEventListener('resize', adjustLayout);
   } else {
     console.error('Página no encontrada');
   }
@@ -1617,4 +1622,31 @@ function editByWindowScale() {
 
 
 
+
+//Barra Direcciones
+
+function adjustLayout() {
+  const body = document.body;
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.clientHeight;
+
+  // Se determina la altura de la barra de direcciones
+  const barHeight = windowHeight - documentHeight;
+
+  // Ajustamos el padding superior e inferior dependiendo de la altura de la barra
+  if (barHeight > 0) {
+      // Si hay barra de direcciones, ajustamos el padding superior
+      body.style.paddingTop = `${barHeight}px`; // Ajuste superior
+      body.style.paddingBottom = `0px`; // Sin ajuste inferior
+  } else {
+      // No hay barra visible
+      body.style.paddingTop = `0px`; // Sin ajuste superior
+      body.style.paddingBottom = `0px`; // Sin ajuste inferior
+  }
+
+  // Ajuste adicional para cuando la barra está fija en la parte inferior
+  if (documentHeight < windowHeight) {
+      body.style.paddingBottom = `${barHeight}px`; // Ajuste inferior
+  }
+}
 
