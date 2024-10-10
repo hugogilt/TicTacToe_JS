@@ -180,7 +180,8 @@ function cargarHTML(pagina) {
         }
       }
     }
-    container[0].style.gridTemplateRows = '0.5fr 1fr 1.5fr';
+    container[0].style.gridTemplateRows = '0.7fr 1fr 1.3fr';
+    window.scrollTo(0, document.body.scrollHeight);
     //-------------------------------------PAGINA 3-------------------------------------
   } else if ((paginas[pagina] && pagina === "pagina3")) {
     document.body.innerHTML = paginas[pagina];
@@ -256,10 +257,12 @@ function cargarHTML(pagina) {
     editByWindowScale();
     // Comprueba el tamaño de la pantalla al redimensionar la ventana
     window.onresize = editByWindowScale;
-    container[0].style.gridTemplateRows = '0.5fr 1fr 1.5fr';
+
   } else {
     console.error('Página no encontrada');
   }
+  container[0].style.gridTemplateRows = '0.5fr 1fr 1.5fr';
+  window.scrollTo(0, document.body.scrollHeight);
   clickDonacion();
 }
 
