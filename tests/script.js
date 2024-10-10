@@ -97,7 +97,7 @@ let player1Choice;
 let player2Choice;
 const playerChoice = document.createElement('p');
 const difficulty = document.createElement('p');
-
+const container = document.getElementsByClassName('container')
 // Función que cambia el contenido según la clave del JSON
 function cargarHTML(pagina) {
   //-------------------------------------PAGINA 1-------------------------------------
@@ -180,6 +180,7 @@ function cargarHTML(pagina) {
         }
       }
     }
+    container[0].style.gridTemplateRows = '0.5fr 1fr 1.5fr';
     //-------------------------------------PAGINA 3-------------------------------------
   } else if ((paginas[pagina] && pagina === "pagina3")) {
     document.body.innerHTML = paginas[pagina];
@@ -255,6 +256,7 @@ function cargarHTML(pagina) {
     editByWindowScale();
     // Comprueba el tamaño de la pantalla al redimensionar la ventana
     window.onresize = editByWindowScale;
+    container[0].style.gridTemplateRows = '0.5fr 1fr 1.5fr';
   } else {
     console.error('Página no encontrada');
   }

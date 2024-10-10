@@ -461,18 +461,15 @@ align-self: center;
         margin: 0 0 0.5rem;
       }
       .board {
-        width: 40vh;
+        width: 43h;
         /* Ajustar a un 90% del ancho de la pantalla */
-        height: 40vh;
+        height: 43h;
         /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
-        max-height: 40vh;
+        max-height: 43h;
         /* Limitar la altura a un 90% de la altura de la pantalla */
-        max-width: 40vh;
+        max-width: 43h;
         /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
         margin: auto;
-      }
-      .container {
-        grid-template-rows: 0.7fr 1fr 1.3fr;
       }
       
   }
