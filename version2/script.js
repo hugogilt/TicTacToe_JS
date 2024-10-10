@@ -103,6 +103,8 @@ function cargarHTML(pagina) {
   //-------------------------------------PAGINA 1-------------------------------------
   if (paginas[pagina] && pagina === "pagina1") {
     document.body.innerHTML = paginas[pagina];
+    horizontal = false;
+    vertical = false;
     horizontaleado = false;
     verticaleado = true;
     //-------------------------------------PAGINA 2-------------------------------------
