@@ -3,7 +3,7 @@ const paginas = {
   "pagina1": `
     <div class="container">
        <div id="start">
-         <h1>Tic Tac Toe</h1>
+         <h1 lang="en">Tic Tac Toe</h1>
           <button onclick = "cargarHTML('pagina3')">1 vs 1</button>
           <button onclick = "cargarHTML('pagina2')">1 vs CPU</button>
        </div>
@@ -14,8 +14,8 @@ const paginas = {
             `,
   "pagina2": `
         <div class="container">
-        <div class="settings">
-        <h1 class="juego">Tic Tac Toe</h1>
+        <div lang="es" class="settings">
+        <h1 lang="en" class="juego">Tic Tac Toe</h1>
             <div id="nivelesBtns" class="inicio">
                 <button class="niveles inicio">Fácil</button>
                 <button class="niveles inicio">Medio</button>
@@ -31,13 +31,13 @@ const paginas = {
           <button id= "volverArrow"><img src="../img/left_arrow.png" alt="Volver atrás"></button>
     </div>
     <footer>
-      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
+      <span lang="es">  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
     </footer>
             `,
   "pagina3": `
     <div class="container">
-        <div class="settings">
-            <h1 class="juego">Tic Tac Toe</h1>
+        <div lang="es" class="settings">
+            <h1 lang="en" class="juego">Tic Tac Toe</h1>
             <div class= "settingsDisplay"></div>
         </div>
         <div class="board juego">
@@ -51,7 +51,7 @@ const paginas = {
             <div class="cell juego" data-index="7"></div>
             <div class="cell juego" data-index="8"></div>
         </div>
-        <div id="enlaces">
+        <div lang="es" id="enlaces">
             <button id="ajustesbtn" class="juego">Ajustes</button>
             <button id="reiniciarbtn" class="juego"> Reiniciar </button>
             <button id="iniciobtn" class="juego">Inicio</button>

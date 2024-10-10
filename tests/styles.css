@@ -450,15 +450,6 @@ align-self: center;
 }
 
 
-
-@media (max-height: 450px) {
-  body {
-    overflow: hidden;
-  }
-}
-
-
-
 @media (max-height: 500px) {
   @media (min-width: 500px) {
       h1{
@@ -469,12 +460,29 @@ align-self: center;
       #turno-player-text {
         margin: 0 0 0.5rem;
       }
-
-
+      .board {
+        width: 40vh;
+        /* Ajustar a un 90% del ancho de la pantalla */
+        height: 40vh;
+        /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+        max-height: 40vh;
+        /* Limitar la altura a un 90% de la altura de la pantalla */
+        max-width: 40vh;
+        /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+        margin: auto;
+      }
+      .container {
+        grid-template-rows: 0.7fr 1fr 1.3fr;
+      }
       
   }
 }
 
+@media (max-height: 450px) {
+  body {
+    overflow: hidden;
+  }
+}
 
 
 @media (max-width: 600px) {
