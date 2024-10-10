@@ -16,7 +16,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 93vh;
+  height: 100vh;
   /* El contenedor ocupa el 100% del alto de la ventana */
   gap: 0;
 
@@ -397,6 +397,86 @@ align-self: center;
 
 }
 
+#divRotate {
+  grid-row: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+
+
+
+
+@media (max-height: 900px) {
+  #divDonacion {
+    width: 215px; /* Ancho del div */
+    height: 350px; /* Alto del div */    
+    grid-template-rows: 81px 189px 81px; /* Crea 3 filas iguales */
+  }
+
+  button:not(#enlaces button) {
+    font-size: 0.8em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  
+
+  footer{
+    padding: 3% 2em;
+  }
+
+  .board {
+    width: 45vh;
+    /* Ajustar a un 90% del ancho de la pantalla */
+    height: 45vh;
+    /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
+    max-height: 45vh;
+    /* Limitar la altura a un 90% de la altura de la pantalla */
+    max-width: 45vh;
+    /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
+    margin: auto;
+  }
+
+
+  .settings *:not(h1) {
+    font-size: 0.9em;
+  }
+}
+
+
+
+@media (max-height: 450px) {
+  body {
+    overflow: hidden;
+  }
+}
+
+
+
+@media (max-height: 500px) {
+  @media (min-width: 500px) {
+      h1{
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        /* width: 100vw;  TOFIX: cuando hago esto se pone scroll */
+      }
+      #turno-player-text {
+        margin: 0 0 0.5rem;
+      }
+
+
+      
+  }
+}
+
+
+
 @media (max-width: 600px) {
   .modal-content {
     margin: 15% auto;
@@ -447,41 +527,3 @@ align-self: center;
   }
 }
 
-@media (max-height: 450px) {
-  body {
-    overflow: auto;
-  }
-}
-
-@media (max-height: 900px) {
-  #divDonacion {
-    width: 215px; /* Ancho del div */
-    height: 350px; /* Alto del div */    
-    grid-template-rows: 81px 189px 81px; /* Crea 3 filas iguales */
-  }
-
-  button:not(#enlaces button) {
-    font-size: 0.8em;
-  }
-
-  h1 {
-    font-size: 2em;
-  }
-
-  .board {
-    width: 40vh;
-    /* Ajustar a un 90% del ancho de la pantalla */
-    height: 40vh;
-    /* Ajustar a un 90% del ancho para mantener el aspecto cuadrado */
-    max-height: 40vw;
-    /* Limitar la altura a un 90% de la altura de la pantalla */
-    max-width: 40vw;
-    /* Limitar el ancho a un 90% de la altura de la pantalla para mantener el cuadrado */
-    margin: auto;
-  }
-
-  footer{
-    padding: 0.5% 2em;
-  }
-
-}

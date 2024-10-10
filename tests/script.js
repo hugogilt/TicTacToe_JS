@@ -93,12 +93,20 @@ const settings = document.getElementsByClassName('settings');
 const casillas = document.getElementsByClassName('cell');
 const footers = document.getElementsByClassName('link');
 let partidaEnMarcha = false;
+let player1Choice;
+let player2Choice;
+const playerChoice = document.createElement('p');
+const difficulty = document.createElement('p');
 
 // Función que cambia el contenido según la clave del JSON
 function cargarHTML(pagina) {
   //-------------------------------------PAGINA 1-------------------------------------
   if (paginas[pagina] && pagina === "pagina1") {
     document.body.innerHTML = paginas[pagina];
+    horizontal = false;
+    vertical = false;
+    horizontaleado = false;
+    verticaleado = true;
     //-------------------------------------PAGINA 2-------------------------------------
   } else if (paginas[pagina] && pagina === "pagina2") {
     document.body.innerHTML = paginas[pagina];
@@ -175,6 +183,9 @@ function cargarHTML(pagina) {
     //-------------------------------------PAGINA 3-------------------------------------
   } else if ((paginas[pagina] && pagina === "pagina3")) {
     document.body.innerHTML = paginas[pagina];
+    if (!(height < 800 && width > height)) {
+      vertical = true;
+    }
     for (let setting of settings) {
       setting.style.gridRow = "1";
       setting.style.alignSelf = "center";
@@ -188,12 +199,10 @@ function cargarHTML(pagina) {
       const divCPU = document.querySelector('.settingsDisplay');
 
       //Inserto estos dos párrafos que no serán los mismos en el modo PvP
-      const difficulty = document.createElement('p');
       difficulty.id = 'difficulty';
       difficulty.textContent = difficultyTextJuego + nivelElegido.textContent;
       divCPU.appendChild(difficulty);
 
-      const playerChoice = document.createElement('p');
       playerChoice.id = 'player-choice';
       playerChoice.textContent = playerChoiceTextJuego + fichaElegida.textContent;
       difficulty.insertAdjacentElement('afterend', playerChoice);
@@ -230,22 +239,27 @@ function cargarHTML(pagina) {
 
       divTurnoPlayer.appendChild(turnoPlayerText);
 
-      const player1Choice = document.createElement('p');
+      player1Choice = document.createElement('p');
       player1Choice.id = 'player1-choice';
       player1Choice.textContent = 'Player 1: X';
       players.appendChild(player1Choice);
 
-      const player2Choice = document.createElement('p');
+      player2Choice = document.createElement('p');
       player2Choice.id = 'player2-choice';
       player2Choice.textContent = 'Player 2: O';
       players.appendChild(player2Choice);
 
-
-
-
-
       PvP();
     }
+    // Comprueba el tamaño de la pantalla al cargar la página 3
+    editByWindowScale();
+    // Comprueba el tamaño de la pantalla al redimensionar la ventana
+    window.onresize = editByWindowScale;
+    // Llama a la función al inicio
+adjustLayout();
+
+// Vuelve a ajustar al cambiar el tamaño de la ventana
+window.addEventListener('resize', adjustLayout);
   } else {
     console.error('Página no encontrada');
   }
@@ -1539,4 +1553,100 @@ function clickDonacion() {
 clickDonacion();
 
 
+
+let vertical = false;
+let horizontal = false;
+let horizontaleado = false;
+let verticaleado = false;
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+function editByWindowScale() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  const divRotate = document.createElement('div');
+  divRotate.id = 'divRotate';
+  const board = document.querySelector('.board');
+  const players = document.querySelector('.settingsDisplay')
+  const divCPU = document.querySelector('.settingsDisplay');
+  if (!(height < 800 && width > height)) {
+    vertical = true;
+  } else {
+    horizontal = true;
+  }
+  if (horizontal && !horizontaleado) {
+    console.log('horizontal');
+    settings[0].style.alignSelf = "start";
+    settings[0].after(divRotate);
+    divRotate.appendChild(board);
+    if (modo) {
+      divRotate.style.gap = '1em';
+      divCPU.style.width = '15%';
+      divRotate.prepend(divCPU);
+      divRotate.appendChild(divCPU.cloneNode(false));
+      board.nextElementSibling.appendChild(difficulty);
+      difficulty.textContent = 'Nivel CPU: ' + nivelElegido.textContent;
+    } else {
+      divRotate.prepend(players);
+      divRotate.appendChild(players.cloneNode(false));
+      board.nextElementSibling.appendChild(player2Choice);
+      divCPU.style.removeProperty('width');
+      divCPU.style.removeProperty('gap');
+    }
+    horizontaleado = true;
+    verticaleado = false;
+    vertical = false;
+  } else if (vertical && !verticaleado) {
+    console.log('vertical');
+    divCPU.style.removeProperty('width')
+    if (document.querySelector('#divRotate')) {
+      board.nextElementSibling.remove()
+    }
+    if (modo) {
+      divCPU.appendChild(playerChoice);
+      divCPU.appendChild(difficulty);
+      difficulty.textContent = difficultyTextJuego + nivelElegido.textContent;
+      settings[0].firstChild.nextSibling.after(divCPU);
+    } else {
+
+      players.appendChild(player1Choice);
+      players.appendChild(player2Choice);
+      settings[0].firstChild.nextSibling.after(players);
+    }
+    divRotate.remove();
+    verticaleado = true;
+    horizontaleado = false;
+    horizontal = false;
+  }
+}
+
+
+
+
+//Barra Direcciones
+
+function adjustLayout() {
+  const body = document.body;
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.clientHeight;
+
+  // Se determina la altura de la barra de direcciones
+  const barHeight = windowHeight - documentHeight;
+
+  // Ajustamos el padding superior e inferior dependiendo de la altura de la barra
+  if (barHeight > 0) {
+      // Si hay barra de direcciones, ajustamos el padding superior
+      body.style.paddingTop = `${barHeight}px`; // Ajuste superior
+      body.style.paddingBottom = `0px`; // Sin ajuste inferior
+  } else {
+      // No hay barra visible
+      body.style.paddingTop = `0px`; // Sin ajuste superior
+      body.style.paddingBottom = `0px`; // Sin ajuste inferior
+  }
+
+  // Ajuste adicional para cuando la barra está fija en la parte inferior
+  if (documentHeight < windowHeight) {
+      body.style.paddingBottom = `${barHeight}px`; // Ajuste inferior
+  }
+}
 
