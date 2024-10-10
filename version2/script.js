@@ -255,11 +255,6 @@ function cargarHTML(pagina) {
     editByWindowScale();
     // Comprueba el tamaño de la pantalla al redimensionar la ventana
     window.onresize = editByWindowScale;
-    // Llama a la función al inicio
-adjustLayout();
-
-// Vuelve a ajustar al cambiar el tamaño de la ventana
-window.addEventListener('resize', adjustLayout);
   } else {
     console.error('Página no encontrada');
   }
@@ -1617,36 +1612,6 @@ function editByWindowScale() {
     verticaleado = true;
     horizontaleado = false;
     horizontal = false;
-  }
-}
-
-
-
-
-//Barra Direcciones
-
-function adjustLayout() {
-  const body = document.body;
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.documentElement.clientHeight;
-
-  // Se determina la altura de la barra de direcciones
-  const barHeight = windowHeight - documentHeight;
-
-  // Ajustamos el padding superior e inferior dependiendo de la altura de la barra
-  if (barHeight > 0) {
-      // Si hay barra de direcciones, ajustamos el padding superior
-      body.style.paddingTop = `${barHeight}px`; // Ajuste superior
-      body.style.paddingBottom = `0px`; // Sin ajuste inferior
-  } else {
-      // No hay barra visible
-      body.style.paddingTop = `0px`; // Sin ajuste superior
-      body.style.paddingBottom = `0px`; // Sin ajuste inferior
-  }
-
-  // Ajuste adicional para cuando la barra está fija en la parte inferior
-  if (documentHeight < windowHeight) {
-      body.style.paddingBottom = `${barHeight}px`; // Ajuste inferior
   }
 }
 
