@@ -1,3 +1,5 @@
+// @copyright 2024 Hugo Gil Tejero. Todos los derechos reservados.
+
 // JSON que contiene el contenido de los tres HTML
 const paginas = {
   "pagina1": `

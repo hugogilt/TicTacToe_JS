@@ -406,6 +406,13 @@ align-self: center;
   gap: 2em;
 }
 
+#copyright {
+  right: 1%;
+  bottom: 3%;
+  font-size: 8px;
+  position: absolute;
+}
+
 
 
 
