@@ -1512,7 +1512,6 @@ function clickDonacion() {
   let footer = footers[0];
   footer.addEventListener('click', function (event) {
     // Prevenir el clic en el span para que no cierre el div inmediatamente
-    console.log('pepe');
     event.stopPropagation();
 
     // Crear el div
