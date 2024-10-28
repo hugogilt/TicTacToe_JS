@@ -11,7 +11,7 @@ const paginas = {
        </div>
      </div>
      <footer>
-      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
+      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span><span lang="en" id="copyright">&copy;Copyright 2024 Hugo Gil Tejero</span></span>
     </footer>
             `,
   "pagina2": `
@@ -33,7 +33,7 @@ const paginas = {
           <button id= "volverArrow"><img src="./img/left_arrow.png" alt="Volver atrás"></button>
     </div>
     <footer>
-      <span lang="es">  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
+      <span lang="es">  Si quieres apoyarme, <span class="link">haz click aquí.</span><span lang="en" id="copyright">&copy;Copyright 2024 Hugo Gil Tejero</span></span>
     </footer>
             `,
   "pagina3": `
@@ -67,7 +67,7 @@ const paginas = {
         </div>
     </div>
     <footer>
-      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span></span>
+      <span>  Si quieres apoyarme, <span class="link">haz click aquí.</span><span lang="en" id="copyright">&copy;Copyright 2024 Hugo Gil Tejero</span></span>
     </footer>
             `
 };
