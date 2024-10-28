@@ -1295,7 +1295,7 @@ function dificil() {
               }
               casillasDisponibles = casillasDisponibles.filter(item => item !== casillaOcupada);
               let random = getRandomInt(7);
-              responder(casillas.indexOf(casillasDisponibles[random]));
+              responder(Array.from(casillas).indexOf(casillasDisponibles[random]));
 
             }
 
@@ -1571,7 +1571,6 @@ function editByWindowScale() {
     horizontal = true;
   }
   if (horizontal && !horizontaleado) {
-    console.log('horizontal');
     settings[0].style.alignSelf = "start";
     settings[0].after(divRotate);
     divRotate.appendChild(board);
@@ -1593,7 +1592,6 @@ function editByWindowScale() {
     verticaleado = false;
     vertical = false;
   } else if (vertical && !verticaleado) {
-    console.log('vertical');
     divCPU.style.removeProperty('width')
     if (document.querySelector('#divRotate')) {
       board.nextElementSibling.remove()
